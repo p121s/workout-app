@@ -1,0 +1,29 @@
+.main_image {
+    width: 100%;
+    height: 450px;
+    border-radius: 7px;
+    background: url("../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg") center / cover no-repeat gray;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: lightgray;
+    margin: 20px 0;
+}
+
+.start_workout {
+    width: 55.6%;
+    text-align: center;
+    padding: 20px;
+    background-color: #AA00FF;
+    border: none;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+}
