@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { SpanInLink } from "../../components/controls/buttons";
 import { CheckMarkPar, MainPar, MinutesPar, NumberPar, SecondPar } from "./CompletePage.styled";
 
 export default function CompletePage({workoutTime}: any) {
@@ -12,7 +13,7 @@ export default function CompletePage({workoutTime}: any) {
             <MinutesPar>Minutes</MinutesPar>
             <NumberPar>{workoutTime}</NumberPar>
             <Link to='/' className="start_workout">
-                Save & Continue
+                <SpanInLink>Save & Continue</SpanInLink>
             </Link>
         </>
     );

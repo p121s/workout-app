@@ -1,4 +1,6 @@
-.start_workout {
+import styled from "styled-components";
+
+export const SpanInLink = styled.span`
     width: 55.6%;
     text-align: center;
     padding: 20px;
@@ -12,4 +14,4 @@
     color: white;
     text-decoration: none;
     font-weight: 400;
-}
+`;

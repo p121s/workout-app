@@ -6,6 +6,7 @@ import WorkoutDayCard from '../../components/WorkoutDayCard/WorkoutDayCard';
 import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
 import { HR } from './ExercisesPage.styled';
 import './ExercisesPage.css';
+import { SpanInLink } from '../../components/controls/buttons';
 
 export default function ExercisesPage() {
 
@@ -41,7 +42,7 @@ export default function ExercisesPage() {
                 </React.Fragment>
             ))}
             <Link to='/workout' className="start_workout">
-                Start Workout
+                <SpanInLink>Start Workout</SpanInLink>
             </Link>
         </>
     );
