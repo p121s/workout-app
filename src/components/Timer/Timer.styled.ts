@@ -40,7 +40,6 @@ export const TimerBlock = styled.div<TimerProps>`
     width: 150px;
     height: 150px;
     border-radius: 150px;
-    // background-color: #1DE9B6;
     overflow: hidden;
     background-color: white;
 
@@ -91,6 +90,9 @@ export const TimerLine = styled.div<TimerProps>`
 `;
 
 export const TimerBody = styled.div`
+    display: flex;
+    justify-content: center;
+    aling-items: center;
     width: 135px;
     height: 135px;
     background-color: white;
@@ -99,7 +101,7 @@ export const TimerBody = styled.div`
 `;
 
 export const TimerCounter = styled.div`
-    display: flex;
-    justify-content: center;
-    aling-items: center;
+    font-size: 40px;
+    margin-top: 45px;
+    color: ${({color}) => color};
 `;

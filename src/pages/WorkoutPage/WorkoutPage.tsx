@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MainBlockTimer, ButtomPrewNext, PauseButton, PauseDiv } from './WorkoutPage.styled';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import Timer from '../../Timer/Timer';
-import Video from '../../Video/Video';
+import Timer from '../../components/Timer/Timer';
+import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
 import '../ExrecisesPage/ExercisesPage.css';
 
@@ -10,8 +10,8 @@ export default function WorkoutPage() {
 
     const state = useSelector((state: RootStateOrAny) => state.data);
     const [questions] = useState(state && state.data.questions);
-    const [duration, setDuration] = useState(6);
-    const [counter, setCounter] = useState(5);
+    const [duration, setDuration] = useState(1);
+    const [counter, setCounter] = useState(0);
     const [isReady, setIsReady] = useState(true);
     const [numberQuestion, setNumberQuestion] = useState<number>(0);
     const [numberExrcise, setNumberExercise] = useState<number>(0);
@@ -40,14 +40,10 @@ export default function WorkoutPage() {
     useEffect(() => {
         if(numberQuestion !== numberOfQuestions) {
             if(counter === -1 && isReady) {
-                setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
-                setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1)
-                setColorTimer('#FF4081');
-                setIsReady(false);
-                setTitle(questions[numberQuestion].exercises[numberExrcise].title);
+                nextGetReady();
             } else if(counter === - 1 && !isReady) {
                 if(numberExrcise < numberOfExercises - 1) {
-                    prewNextExercise(1);
+                    nextExercise(1);
                 } else {
                     setNumberQuestion(numberQuestion + 1);
                     setNumberExercise(0);
@@ -59,9 +55,17 @@ export default function WorkoutPage() {
                 }, 1000);
             }
         }
-    }, [counter, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions]);
+    }, [counter, duration, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions]);
 
-    const prewNextExercise = (prewOrNext: number) => {
+    const nextGetReady = () => {
+        setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
+        setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1)
+        setColorTimer('#FF4081');
+        setIsReady(false);
+        setTitle(questions[numberQuestion].exercises[numberExrcise].title);
+    }
+
+    const nextExercise = (prewOrNext: number) => {
         setNumberExercise(numberExrcise + prewOrNext);
         setExerciseVideo(questions[numberQuestion].exercises[numberExrcise].video);
         setCounter(5);

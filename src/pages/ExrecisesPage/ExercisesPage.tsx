@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ExerciseCardMini from '../../ExerciseCardMini/ExerciseCardMini';
-import WorkoutDayCard from '../../WorkoutDayCard/WorkoutDayCard';
-import background from '../../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
+import ExerciseCardMini from '../../components/ExerciseCardMini/ExerciseCardMini';
+import WorkoutDayCard from '../../components/WorkoutDayCard/WorkoutDayCard';
+import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
 import { HR } from './ExercisesPage.styled';
 import './ExercisesPage.css';
 
@@ -15,8 +15,6 @@ export default function ExercisesPage() {
     useEffect(() => {
         setQuestions(state && state.data.questions);
     }, [state]);
-
-    console.log(state);
 
     return (
         <>
