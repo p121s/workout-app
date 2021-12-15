@@ -4,7 +4,6 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import Timer from '../../components/Timer/Timer';
 import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
-import '../ExrecisesPage/ExercisesPage.css';
 
 export default function WorkoutPage() {
 

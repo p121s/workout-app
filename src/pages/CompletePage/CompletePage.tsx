@@ -12,7 +12,7 @@ export default function CompletePage({workoutTime}: any) {
             <p>Burned Calories</p>
             <MinutesPar>Minutes</MinutesPar>
             <NumberPar>{workoutTime}</NumberPar>
-            <Link to='/' className="start_workout">
+            <Link to='/'>
                 <SpanInLink>Save & Continue</SpanInLink>
             </Link>
         </>
