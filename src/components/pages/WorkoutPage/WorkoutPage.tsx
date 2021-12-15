@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import { CountdownCircleTimer } from 'react-countdown-circle-timer';
-// import RenderTime from '../RenderTime';
-import { ButtomPrewNext, PauseButton, PauseDiv } from '../styledComponents/WorkoutPageSC';
+import { MainBlockTimer, ButtomPrewNext, PauseButton, PauseDiv } from './WorkoutPage.styled';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import Timer from '../timer/Timer';
-import Video from '../Video';
-import CompletePage from './CompletePage';
-import './Timer.css';
-import './ExercisesPage.css';
-import './WorkoutPage.css';
+import Timer from '../../Timer/Timer';
+import Video from '../../Video/Video';
+import CompletePage from '../CompletePage/CompletePage';
+import '../ExrecisesPage/ExercisesPage.css';
 
 export default function WorkoutPage() {
 
     const state = useSelector((state: RootStateOrAny) => state.data);
     const [questions] = useState(state && state.data.questions);
-    const [duration, setDuration] = useState(5);
+    const [duration, setDuration] = useState(6);
+    const [counter, setCounter] = useState(5);
     const [isReady, setIsReady] = useState(true);
     const [numberQuestion, setNumberQuestion] = useState<number>(0);
     const [numberExrcise, setNumberExercise] = useState<number>(0);
@@ -26,10 +23,9 @@ export default function WorkoutPage() {
     const [title, setTitle] = useState('');
     const [workoutTime, setWorkoutTime] = useState(0);
     // const [exercisePhoto, setExercisePhoto] = useState();
-    console.log(numberExrcise, numberQuestion, numberOfExercises, numberOfQuestions);
+    // console.log(numberExrcise, numberQuestion, numberOfExercises, numberOfQuestions);
 
     useEffect(() => {
-        console.log(2);
         if(numberQuestion === numberOfQuestions && numberOfQuestions) {
             setIsComplete(true);
         } else {
@@ -42,14 +38,14 @@ export default function WorkoutPage() {
     }, [numberExrcise, numberOfQuestions, numberQuestion])
 
     useEffect(() => {
-        console.log(3);
         if(numberQuestion !== numberOfQuestions) {
-            if(duration === -1 && isReady) {
-                setDuration(questions[numberQuestion].exercises[numberExrcise].duration);
+            if(counter === -1 && isReady) {
+                setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
+                setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1)
                 setColorTimer('#FF4081');
                 setIsReady(false);
                 setTitle(questions[numberQuestion].exercises[numberExrcise].title);
-            } else if(duration === - 1 && !isReady) {
+            } else if(counter === - 1 && !isReady) {
                 if(numberExrcise < numberOfExercises - 1) {
                     prewNextExercise(1);
                 } else {
@@ -58,17 +54,18 @@ export default function WorkoutPage() {
                 }
             } else {
                 setTimeout(() => {
-                        setDuration(duration - 1);
+                        setCounter(counter - 1);
                         setWorkoutTime(workoutTime + 1);
                 }, 1000);
             }
         }
-    }, [duration, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions]);
+    }, [counter, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions]);
 
     const prewNextExercise = (prewOrNext: number) => {
         setNumberExercise(numberExrcise + prewOrNext);
         setExerciseVideo(questions[numberQuestion].exercises[numberExrcise].video);
-        setDuration(5);
+        setCounter(5);
+        setDuration(6);
         setColorTimer('#1DE9B6');
         setIsReady(true);
         setTitle('Get Ready');
@@ -80,7 +77,7 @@ export default function WorkoutPage() {
                 !isComplete ? (
                     <>
                         <h2>{title}</h2>
-                        <div className='main_block-timer'>
+                        <MainBlockTimer className='main_block-timer'>
                             <div>
                                 <ButtomPrewNext
                                     disabled={numberQuestion === 0 && numberExrcise === 0 ? true : false}
@@ -92,27 +89,12 @@ export default function WorkoutPage() {
                                 </ButtomPrewNext>
                             </div>
                             <div className='timer-wrapper'>
-                                <Timer sec={duration} color={colorTimer} />
-                                {/* <CountdownCircleTimer
-                                strokeWidth={8}
-                                size={150}
-                                isPlaying={true}
-                                duration={duration}
-                                colors={[
-                                    ['#1DE9B6', 0.33],
-                                    ['#FFA500', 0.33],
-                                    ['#FFA500', 0.33],
-                                    ['#FF0000', 0.33],
-                                ]}
-                                onComplete={() => [true, 1000]}
-                                >
-                                    {RenderTime}
-                                </CountdownCircleTimer> */}
+                                <Timer sec={counter} color={colorTimer} duration={duration} />
                             </div>
                             <div>
                                 <ButtomPrewNext disabled={false} onClick={() => setNumberExercise(numberExrcise + 1)}>&#9654;&#10073;</ButtomPrewNext>
                             </div>
-                        </div>
+                        </MainBlockTimer>
                         <Video exerciseVideo={exerciseVideo} />
                         <PauseDiv>
                             <PauseButton>&#10073;&#10073;</PauseButton>

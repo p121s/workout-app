@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { ButtPrewNxt } from './WorkoutPage.interfases';
 
-interface ButtPrewNxt {
-    disabled: boolean;
-}
+export const MainBlockTimer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px 0;
+`;
 
 export const ButtomPrewNext = styled.button<ButtPrewNxt>`
     width: 70px;

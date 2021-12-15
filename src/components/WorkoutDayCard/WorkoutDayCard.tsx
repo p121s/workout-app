@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainDivDayCard, ParDayNumber, ParWorkoutDescription, ParWorkoutName } from './styledComponents/WorkoutDayCardSC';
+import { MainDivDayCard, ParDayNumber, ParWorkoutDescription, ParWorkoutName } from './WorkoutDayCard.styled';
 
 export default function WorkoutDayCard({backgroundSrc, day, workoutName, workoutDescription}: any) {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MainDiv, DivImage, Image, DivText, ParNameExercise, ParTime } from './styledComponents/ExerciseCardMiniSC';
+import { MainDiv, DivImage, Image, DivText, ParNameExercise, ParTime } from './ExerciseCardMini.styled';
 
 export default function ExerciseCardMini({src, title, duration}: any) {
     return (

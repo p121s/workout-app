@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CheckMarkPar, MainPar, MinutesPar, NumberPar, SecondPar } from "../styledComponents/CompletePageSC";
+import { CheckMarkPar, MainPar, MinutesPar, NumberPar, SecondPar } from "./CompletePage.styled";
 
 export default function CompletePage({workoutTime}: any) {
     return (

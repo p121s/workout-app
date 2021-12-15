@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ExerciseCardMini from '../ExerciseCardMini';
-import WorkoutDayCard from '../WorkoutDayCard';
-import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
+import ExerciseCardMini from '../../ExerciseCardMini/ExerciseCardMini';
+import WorkoutDayCard from '../../WorkoutDayCard/WorkoutDayCard';
+import background from '../../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
+import { HR } from './ExercisesPage.styled';
 import './ExercisesPage.css';
 
 export default function ExercisesPage() {
@@ -29,7 +30,7 @@ export default function ExercisesPage() {
             
             {questions && questions.map((question: any) => (
                 <React.Fragment key={`${question.title}_rect_fragment`}>
-                    <hr key={`${question.title}_hr`}></hr>
+                    <HR key={`${question.title}_hr`}></HR>
                     <h3 key={`${question.title}_h3`}>{question.title}</h3>
                     {question.exercises.map((exercise: any) => (
                         <ExerciseCardMini
