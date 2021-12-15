@@ -9,8 +9,8 @@ export default function WorkoutPage() {
 
     const state = useSelector((state: RootStateOrAny) => state.data);
     const [questions] = useState(state && state.data.questions);
-    const [duration, setDuration] = useState(1);
-    const [counter, setCounter] = useState(0);
+    const [duration, setDuration] = useState(6);
+    const [counter, setCounter] = useState(5);
     const [isReady, setIsReady] = useState(true);
     const [numberQuestion, setNumberQuestion] = useState<number>(0);
     const [numberExrcise, setNumberExercise] = useState<number>(0);
@@ -58,7 +58,7 @@ export default function WorkoutPage() {
 
     const nextGetReady = () => {
         setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
-        setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1)
+        setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1);
         setColorTimer('#FF4081');
         setIsReady(false);
         setTitle(questions[numberQuestion].exercises[numberExrcise].title);
