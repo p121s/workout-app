@@ -13,7 +13,7 @@ export default function ExercisesPage() {
     const [questions, setQuestions] = useState([]);
 
     useEffect(() => {
-        setQuestions(state && state.data.questions);
+        state && setQuestions(state.data.questions);
     }, [state]);
 
     return (
@@ -26,11 +26,12 @@ export default function ExercisesPage() {
                 workoutDescription='Easy • 15 min • No equipment'
              />
             
-            {questions && questions.map((question: any) => (
-                <React.Fragment key={`${question.title}_rect_fragment`}>
-                    <HR key={`${question.title}_hr`}></HR>
-                    <h3 key={`${question.title}_h3`}>{question.title}</h3>
+            {questions ? questions.map((question: any) => (
+                <React.Fragment key={question.title}>
+                    <HR />
+                    <h3>{question.title}</h3>
                     {question.exercises.map((exercise: any) => (
+                        
                         <ExerciseCardMini
                             key={exercise.id}
                             src={exercise.photo}
@@ -39,10 +40,27 @@ export default function ExercisesPage() {
                          />
                     ))}
                 </React.Fragment>
-            ))}
+            )) : 'loading'}
             <Link to='/workout'>
                 <SpanInLink>Start Workout</SpanInLink>
             </Link>
         </>
     );
+}
+
+interface Exrcise {
+    id: number;
+    duration: string;
+
+}
+
+interface MuscleGroup {
+    name: string;
+    photo: string;
+}
+
+interface Question {
+    exercises: Exrcise[]
+    muscle_group: MuscleGroup
+    title: string;
 }

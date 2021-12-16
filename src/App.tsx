@@ -4,7 +4,7 @@ import { getDataFromAPI } from './redux/asyncActions';
 import ExercisesPage from './pages/ExrecisesPage/ExercisesPage';
 import { Routes, Route } from 'react-router';
 import WorkoutPage from './pages/WorkoutPage/WorkoutPage';
-import './App.css';
+import { AppBlock } from './App.styled';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,12 +14,12 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
+    <AppBlock>
       <Routes>
         <Route path='/' element={<ExercisesPage />} />
         <Route path='/workout' element={<WorkoutPage />} />
       </Routes>
-    </div>
+    </AppBlock>
   );
 }
 

@@ -53,6 +53,7 @@ export const TimerBlock = styled.div<TimerProps>`
         background-color: ${({color}) => color};
         z-index: 4;
         animation: ${maskLeft} ${({duration}) => duration}s steps(1, end) forwards;
+        animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
     }
 
     &:after {
@@ -65,6 +66,7 @@ export const TimerBlock = styled.div<TimerProps>`
         background-color: white;
         z-index: 4;
         animation: ${maskRight} ${({duration}) => duration}s steps(1, end) forwards;
+        animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
     }
 `;
 
@@ -77,6 +79,7 @@ export const TimerLine = styled.div<TimerProps>`
     background-color: ${({color}) => color};
     border-radius: 50%;
     animation: ${lineRotate} ${({duration}) => duration}s linear forwards;
+    animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
 
     &:after {
         content: "";

@@ -8,7 +8,7 @@ import CompletePage from '../CompletePage/CompletePage';
 export default function WorkoutPage() {
 
     const state = useSelector((state: RootStateOrAny) => state.data);
-    const [questions] = useState(state && state.data.questions);
+    const [questions, setQuestion] = useState(state && state.data.questions);
     const [duration, setDuration] = useState(6);
     const [counter, setCounter] = useState(5);
     const [isReady, setIsReady] = useState(true);
@@ -21,6 +21,7 @@ export default function WorkoutPage() {
     const [isComplete, setIsComplete] = useState(false);
     const [title, setTitle] = useState('');
     const [workoutTime, setWorkoutTime] = useState(0);
+    const [isPause, setIsPause] = useState(false);
     // const [exercisePhoto, setExercisePhoto] = useState();
     // console.log(numberExrcise, numberQuestion, numberOfExercises, numberOfQuestions);
 
@@ -29,32 +30,34 @@ export default function WorkoutPage() {
             setIsComplete(true);
         } else {
             setNumberOfQuestions(questions.length);
-            setNumberOfExercises(questions[numberQuestion].exercises && questions[numberQuestion].exercises.length);
-            setExerciseVideo(questions[numberQuestion].exercises[numberExrcise].video);
+            setNumberOfExercises(questions[numberQuestion]?.exercises && questions[numberQuestion].exercises.length);
+            setExerciseVideo(questions[numberQuestion]?.exercises[numberExrcise].video);
             setColorTimer('#1DE9B6');
             setTitle('GetReady');
         }
     }, [numberExrcise, numberOfQuestions, numberQuestion])
 
     useEffect(() => {
-        if(numberQuestion !== numberOfQuestions) {
-            if(counter === -1 && isReady) {
-                nextGetReady();
-            } else if(counter === - 1 && !isReady) {
-                if(numberExrcise < numberOfExercises - 1) {
-                    nextExercise(1);
+        if(!isPause) {
+            if(numberQuestion !== numberOfQuestions) {
+                if(counter === -1 && isReady) {
+                    nextGetReady();
+                } else if(counter === - 1 && !isReady) {
+                    if(numberExrcise < numberOfExercises - 1) {
+                        nextExercise(1);
+                    } else {
+                        setNumberQuestion(numberQuestion + 1);
+                        setNumberExercise(0);
+                    }
                 } else {
-                    setNumberQuestion(numberQuestion + 1);
-                    setNumberExercise(0);
+                    setTimeout(() => {
+                            setCounter(counter - 1);
+                            setWorkoutTime(workoutTime + 1);
+                    }, 1000);
                 }
-            } else {
-                setTimeout(() => {
-                        setCounter(counter - 1);
-                        setWorkoutTime(workoutTime + 1);
-                }, 1000);
             }
         }
-    }, [counter, duration, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions]);
+    }, [counter, duration, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions, isPause]);
 
     const nextGetReady = () => {
         setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
@@ -74,6 +77,10 @@ export default function WorkoutPage() {
         setTitle('Get Ready');
     }
 
+    const paused = () => {
+        setIsPause(!isPause);
+    };
+
     return (
         <div style={{textAlign: 'center'}}>
             {
@@ -92,15 +99,22 @@ export default function WorkoutPage() {
                                 </ButtomPrewNext>
                             </div>
                             <div className='timer-wrapper'>
-                                <Timer sec={counter} color={colorTimer} duration={duration} />
+                                <Timer sec={counter} color={colorTimer} duration={duration} isPause={isPause} />
                             </div>
                             <div>
-                                <ButtomPrewNext disabled={false} onClick={() => setNumberExercise(numberExrcise + 1)}>&#9654;&#10073;</ButtomPrewNext>
+                                <ButtomPrewNext
+                                    disabled={numberQuestion === numberOfQuestions - 1 && numberExrcise === numberOfExercises - 1 ? true : false}
+                                    onClick={() => setNumberExercise(numberExrcise + 1)}
+                                >
+                                    &#9654;&#10073;
+                                </ButtomPrewNext>
                             </div>
                         </MainBlockTimer>
                         <Video exerciseVideo={exerciseVideo} />
                         <PauseDiv>
-                            <PauseButton>&#10073;&#10073;</PauseButton>
+                            <PauseButton onClick={paused}>
+                                {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
+                            </PauseButton>
                         </PauseDiv>
                     </>
                 ) : (
