@@ -9,10 +9,18 @@ export const MainDivDayCard = styled.div<DivProps>`
     height: 450px;
     border-radius: 7px;
     background: url("${({background}) => background}") center / cover no-repeat gray;
+
+    @media screen and (max-width: 500px) {
+        border-radius: 0px;
+    }
 `;
 
 export const ParagraphDayCard = styled.p`
     margin: 15px 0;
+
+    @media screen and (max-width: 500px) {
+        margin: 15px 15px;
+    }
 `;
 
 export const ParDayNumber = styled(ParagraphDayCard)`
