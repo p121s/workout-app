@@ -8,68 +8,56 @@ import CompletePage from '../CompletePage/CompletePage';
 export default function WorkoutPage() {
 
     const state = useSelector((state: RootStateOrAny) => state.data);
-    const [questions, setQuestion] = useState(state && state.data.questions);
     const [duration, setDuration] = useState(6);
     const [counter, setCounter] = useState(5);
     const [isReady, setIsReady] = useState(true);
-    const [numberQuestion, setNumberQuestion] = useState<number>(0);
-    const [numberExrcise, setNumberExercise] = useState<number>(0);
-    const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0);
-    const [numberOfExercises, setNumberOfExercises] = useState<number>(0);
-    const [exerciseVideo, setExerciseVideo] = useState();
-    const [colorTimer, setColorTimer] = useState('');
+    const [allExercises, setAllExercises] = useState<any[]>([]);
+    const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(0);
+    const [colorTimer, setColorTimer] = useState('#1DE9B6');
     const [isComplete, setIsComplete] = useState(false);
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState('Get Ready');
     const [workoutTime, setWorkoutTime] = useState(0);
     const [isPause, setIsPause] = useState(false);
-    // const [exercisePhoto, setExercisePhoto] = useState();
-    // console.log(numberExrcise, numberQuestion, numberOfExercises, numberOfQuestions);
+    console.log(allExercises[currentExerciseNum]?.video);
+    
 
     useEffect(() => {
-        if(numberQuestion === numberOfQuestions && numberOfQuestions) {
+        state && setAllExercises(state.data.questions.map(({exercises}: any) => exercises).flat());
+    }, [state])
+
+    useEffect(() => {
+        console.log(allExercises.length);
+        if(currentExerciseNum !==0 && currentExerciseNum === allExercises.length) {
             setIsComplete(true);
-        } else {
-            setNumberOfQuestions(questions.length);
-            setNumberOfExercises(questions[numberQuestion]?.exercises && questions[numberQuestion].exercises.length);
-            setExerciseVideo(questions[numberQuestion]?.exercises[numberExrcise].video);
-            setColorTimer('#1DE9B6');
-            setTitle('GetReady');
         }
-    }, [numberExrcise, numberOfQuestions, numberQuestion])
+    }, [allExercises, allExercises.length, currentExerciseNum])
 
     useEffect(() => {
         if(!isPause) {
-            if(numberQuestion !== numberOfQuestions) {
-                if(counter === -1 && isReady) {
-                    nextGetReady();
-                } else if(counter === - 1 && !isReady) {
-                    if(numberExrcise < numberOfExercises - 1) {
-                        nextExercise(1);
-                    } else {
-                        setNumberQuestion(numberQuestion + 1);
-                        setNumberExercise(0);
-                    }
-                } else {
-                    setTimeout(() => {
-                            setCounter(counter - 1);
-                            setWorkoutTime(workoutTime + 1);
-                    }, 1000);
-                }
+            if(counter === -1 && isReady) {
+                nextGetReady();
+            } else if(counter === - 1 && !isReady) {
+                nextExercise();
+            } else {
+                const timeout = setTimeout(() => {
+                        setCounter(counter - 1);
+                        setWorkoutTime(workoutTime + 1);
+                }, 1000);
+                // clearTimeout(timeout);
             }
         }
-    }, [counter, duration, isReady, numberExrcise, numberOfExercises, numberOfQuestions, numberQuestion, questions, isPause]);
+    }, [counter, isReady, isPause]);
 
     const nextGetReady = () => {
-        setCounter(questions[numberQuestion].exercises[numberExrcise].duration);
-        setDuration(questions[numberQuestion].exercises[numberExrcise].duration + 1);
+        setCounter(allExercises[currentExerciseNum].duration);
+        setDuration(allExercises[currentExerciseNum].duration + 1);
         setColorTimer('#FF4081');
         setIsReady(false);
-        setTitle(questions[numberQuestion].exercises[numberExrcise].title);
+        setTitle(allExercises[currentExerciseNum].title);
     }
 
-    const nextExercise = (prewOrNext: number) => {
-        setNumberExercise(numberExrcise + prewOrNext);
-        setExerciseVideo(questions[numberQuestion].exercises[numberExrcise].video);
+    const nextExercise = () => {
+        setCurrentExerciseNum(currentExerciseNum + 1);
         setCounter(5);
         setDuration(6);
         setColorTimer('#1DE9B6');
@@ -90,9 +78,9 @@ export default function WorkoutPage() {
                         <MainBlockTimer className='main_block-timer'>
                             <div>
                                 <ButtomPrewNext
-                                    disabled={numberQuestion === 0 && numberExrcise === 0 ? true : false}
+                                    disabled={currentExerciseNum === 0 ? true : false}
                                     onClick={() => {
-                                        setNumberExercise(numberExrcise - 1);
+                                        setCurrentExerciseNum(currentExerciseNum - 1);
                                     }}
                                 >
                                     &#10073;&#9664;
@@ -103,14 +91,16 @@ export default function WorkoutPage() {
                             </div>
                             <div>
                                 <ButtomPrewNext
-                                    disabled={numberQuestion === numberOfQuestions - 1 && numberExrcise === numberOfExercises - 1 ? true : false}
-                                    onClick={() => setNumberExercise(numberExrcise + 1)}
+                                    disabled={currentExerciseNum === allExercises.length - 1 ? true : false}
+                                    onClick={() => setCurrentExerciseNum(currentExerciseNum + 1)}
                                 >
                                     &#9654;&#10073;
                                 </ButtomPrewNext>
                             </div>
                         </MainBlockTimer>
-                        <Video exerciseVideo={exerciseVideo} />
+                        <Video
+                            exerciseVideo={allExercises[currentExerciseNum]?.video}
+                            poster={allExercises[currentExerciseNum]?.photo} />
                         <PauseDiv>
                             <PauseButton onClick={paused}>
                                 {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}

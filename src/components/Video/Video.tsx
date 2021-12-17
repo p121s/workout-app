@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Video({exerciseVideo}: any) {
+export default function Video({exerciseVideo, poster}: any) {
     return (
-        <video src={`${exerciseVideo}`} autoPlay loop width="100%">
+        <video poster={poster} src={`${exerciseVideo}`} autoPlay loop width="100%">
             <source type="video/mp4" />
         </video>
     );

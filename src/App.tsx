@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getDataFromAPI } from './redux/asyncActions';
+import { getDataFromAPI } from './store/asyncActions';
 import ExercisesPage from './pages/ExrecisesPage/ExercisesPage';
 import { Routes, Route } from 'react-router';
 import WorkoutPage from './pages/WorkoutPage/WorkoutPage';
