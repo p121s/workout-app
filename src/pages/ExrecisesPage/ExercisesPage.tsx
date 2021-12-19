@@ -9,12 +9,15 @@ import WorkoutDayCard from '../../components/WorkoutDayCard/WorkoutDayCard';
 import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
 import { HR } from './ExercisesPage.styled';
 import { SpanInLink } from '../../components/controls/buttons';
+import { Exercise, Question } from '../pages.interfaces';
 
 export default function ExercisesPage() {
 
     const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
-    const [questions, setQuestions] = useState<any>([]);
-    const [currentWorkout, setThisCurrentWorkout] = useState([]);
+    const [questions, setQuestions] = useState<Question[]>([]);
+    const [currentWorkout, setThisCurrentWorkout] = useState<Exercise[]>([]);
+
+    console.log(questions);
 
     const dispatch = useDispatch();
   
@@ -64,21 +67,4 @@ export default function ExercisesPage() {
             </Link>
         </>
     );
-}
-
-interface Exrcise {
-    id: number;
-    duration: string;
-
-}
-
-interface MuscleGroup {
-    name: string;
-    photo: string;
-}
-
-interface Question {
-    exercises: Exrcise[]
-    muscle_group: MuscleGroup
-    title: string;
 }

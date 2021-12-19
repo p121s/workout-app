@@ -1,27 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { MainBlockTimer, ButtomPrewNext, PauseButton, PauseDiv } from './WorkoutPage.styled';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import Timer from '../../components/Timer/Timer';
 import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
+import { Exercise } from '../pages.interfaces';
 
 export default function WorkoutPage() {
 
-    const currentWorkout = useSelector((currentWorkout: RootStateOrAny) => currentWorkout.reducerCurrentWorkout.currentWorkout);
-    const [duration, setDuration] = useState(6);
-    const [counter, setCounter] = useState(5);
-    const [isReady, setIsReady] = useState(true);
+    const currentWorkout: Exercise[] = useSelector((currentWorkout: RootStateOrAny) => currentWorkout.reducerCurrentWorkout.currentWorkout);
     const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(0);
-    const [colorTimer, setColorTimer] = useState('#1DE9B6');
-    const [isComplete, setIsComplete] = useState(false);
-    const [title, setTitle] = useState('Get Ready');
-    const [workoutTime, setWorkoutTime] = useState(0);
-    const [isPause, setIsPause] = useState(false);
-
+    const [duration, setDuration] = useState<number>(6);
+    const [counter, setCounter] = useState<number>(5);
+    const [colorTimer, setColorTimer] = useState<string>('#1DE9B6');
+    const [title, setTitle] = useState<string>('Get Ready');
+    const [workoutTime, setWorkoutTime] = useState<number>(0);
     const currentTimeout = useRef<any>(0);
 
-    console.log(currentWorkout);
+    const [isReady, setIsReady] = useState<boolean>(true);
+    const [isPause, setIsPause] = useState<boolean>(false);
+    const [isComplete, setIsComplete] = useState<boolean>(false);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(currentExerciseNum !== 0 && currentExerciseNum === currentWorkout.length) {
