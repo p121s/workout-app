@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getDataFromAPI } from './store/asyncActions';
+import React from 'react';
 import ExercisesPage from './pages/ExrecisesPage/ExercisesPage';
 import { Routes, Route } from 'react-router';
 import WorkoutPage from './pages/WorkoutPage/WorkoutPage';
 import { AppBlock } from './App.styled';
 
 function App() {
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(getDataFromAPI());
-  }, [dispatch]);
 
   return (
     <AppBlock>
