@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { MainBlockTimer, ButtomPrewNext, PauseButton, PauseDiv } from './WorkoutPage.styled';
+// import { useDispatch } from 'react-redux';
+import { MainBlockTimer, PauseDiv } from './WorkoutPage.styled';
+import { ButtomPrewNext, PauseButton } from '../../components/controls/buttons';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import Timer from '../../components/Timer/Timer';
 import Video from '../../components/Video/Video';
@@ -11,7 +12,7 @@ import { Exercise } from '../pages.interfaces';
 export default function WorkoutPage() {
 
     const currentWorkout: Exercise[] = useSelector((currentWorkout: RootStateOrAny) => currentWorkout.reducerCurrentWorkout.currentWorkout);
-    const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(0);
+    const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(Number(localStorage.getItem('currentExerciseNum')));
     const [duration, setDuration] = useState<number>(6);
     const [counter, setCounter] = useState<number>(5);
     const [colorTimer, setColorTimer] = useState<string>('#1DE9B6');
@@ -23,21 +24,24 @@ export default function WorkoutPage() {
     const [isPause, setIsPause] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        localStorage.setItem('currentExerciseNum', `${currentExerciseNum}`);
+    }, [currentExerciseNum]);
 
     useEffect(() => {
-        if(currentExerciseNum !== 0 && currentExerciseNum === currentWorkout.length) {
+        if(currentExerciseNum !== 0 && currentExerciseNum >= currentWorkout.length) {
             clearTimeout(currentTimeout.current);
             setIsComplete(true);
+            localStorage.setItem('currentExerciseNum', `0`);
         }
     }, [currentExerciseNum, currentWorkout.length])
 
     useEffect(() => {
-        if(!isPause) {
+        if(!isPause && !isComplete) {
             if(counter === -1 && isReady) {
                 nextExercise();
             } else if(counter === - 1 && !isReady) {
-                nextGetReady();
+                nextGetReady(1);
             } else {
                 currentTimeout.current = setTimeout(() => {
                         setCounter(counter - 1);
@@ -55,8 +59,8 @@ export default function WorkoutPage() {
         setTitle(currentWorkout[currentExerciseNum].title);
     }
 
-    const nextGetReady = () => {
-        setCurrentExerciseNum(currentExerciseNum + 1);
+    const nextGetReady = (prewOrNext: number) => {
+        setCurrentExerciseNum(currentExerciseNum + prewOrNext);
         setCounter(5);
         setDuration(6);
         setColorTimer('#1DE9B6');
@@ -65,6 +69,7 @@ export default function WorkoutPage() {
     }
 
     const paused = () => {
+        clearTimeout(currentTimeout.current);
         setIsPause(!isPause);
     };
 
@@ -80,8 +85,7 @@ export default function WorkoutPage() {
                                     disabled={currentExerciseNum === 0 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
-                                        setCurrentExerciseNum(currentExerciseNum - 1);
-                                        nextGetReady();
+                                        nextGetReady(-1);
                                     }}
                                 >
                                     &#10073;&#9664;
@@ -95,8 +99,7 @@ export default function WorkoutPage() {
                                     disabled={currentExerciseNum === currentWorkout.length - 1 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
-                                        setCurrentExerciseNum(currentExerciseNum + 1);
-                                        nextGetReady();
+                                        nextGetReady(1);
                                     }}
                                 >
                                     &#9654;&#10073;
@@ -105,7 +108,10 @@ export default function WorkoutPage() {
                         </MainBlockTimer>
                         <Video
                             exerciseVideo={currentWorkout[currentExerciseNum]?.video}
-                            poster={currentWorkout[currentExerciseNum]?.photo} />
+                            poster={currentWorkout[currentExerciseNum]?.photo} 
+                            isPause={isPause}
+                            isReady={isReady}
+                        />
                         <PauseDiv>
                             <PauseButton onClick={paused}>
                                 {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}

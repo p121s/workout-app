@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import ExerciseCardMini from '../../components/ExerciseCardMini/ExerciseCardMini';
 import WorkoutDayCard from '../../components/WorkoutDayCard/WorkoutDayCard';
 import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
-import { HR } from './ExercisesPage.styled';
+import { BlockAllExercises, HR } from './ExercisesPage.styled';
 import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
 
@@ -16,8 +16,6 @@ export default function ExercisesPage() {
     const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
     const [questions, setQuestions] = useState<Question[]>([]);
     const [currentWorkout, setThisCurrentWorkout] = useState<Exercise[]>([]);
-
-    console.log(questions);
 
     const dispatch = useDispatch();
   
@@ -39,14 +37,14 @@ export default function ExercisesPage() {
 
     return (
         <>
-            <h1>&#8629;</h1>
+            {/* <h1>&#8629;</h1> */}
             <WorkoutDayCard
                 backgroundSrc={`${background}`}
                 day={1}
                 workoutName='Morning Flexibility Routine'
                 workoutDescription='Easy • 15 min • No equipment'
              />
-            
+            <BlockAllExercises>
             {questions ? questions.map((question: any) => (
                 <React.Fragment key={question.title}>
                     <HR />
@@ -62,8 +60,9 @@ export default function ExercisesPage() {
                     ))}
                 </React.Fragment>
             )) : 'loading'}
+            </BlockAllExercises>
             <Link to='/workout'>
-                <SpanInLink>Start Workout</SpanInLink>
+                <SpanInLink>{localStorage.getItem('currentExerciseNum') === '0' ? 'Start Workout' : 'Resume'}</SpanInLink>
             </Link>
         </>
     );

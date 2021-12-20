@@ -6,3 +6,8 @@ export const HR = styled.hr`
     background-color: lightgray;
     margin: 20px 0;
 `;
+
+export const BlockAllExercises = styled.div`
+    width: 90%;
+    padding: 0 20px;
+`;

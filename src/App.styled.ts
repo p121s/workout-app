@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const AppBlock = styled.div`
     width: 55.6%;
-    margin: 120px auto;
+    height: ${document.documentElement.clientHeight};
+    margin: 50px auto 120px;
 
     @media screen and (max-width: 500px) {
-        margin: 120px 0;
+        margin: 0 auto 95px;
         width: 100%;
     }
 `;
