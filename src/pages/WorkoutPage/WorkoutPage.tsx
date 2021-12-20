@@ -32,7 +32,7 @@ export default function WorkoutPage() {
         if(currentExerciseNum !== 0 && currentExerciseNum >= currentWorkout.length) {
             clearTimeout(currentTimeout.current);
             setIsComplete(true);
-            localStorage.setItem('currentExerciseNum', `0`);
+            localStorage.clear();
         }
     }, [currentExerciseNum, currentWorkout.length])
 
