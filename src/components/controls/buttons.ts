@@ -29,6 +29,11 @@ export const ButtomPrewNext = styled.button<ButtPrewNxt>`
     border: 2px solid ${({disabled}) => disabled ? 'gray' : '#AA00FF'} ;
     color: ${({disabled}) => disabled ? 'gray' : '#AA00FF'};
     margin: 10px;
+
+    @media screen and (max-width: 500px) {
+        width: 55px;
+        height: 35px;
+    }
 `;
 
 export const PauseButton = styled.button`

@@ -39,7 +39,7 @@ export const TimerBlock = styled.div<TimerProps>`
     align-items: center;
     width: 150px;
     height: 150px;
-    border-radius: 150px;
+    border-radius: 50%;
     overflow: hidden;
     background-color: white;
 
@@ -67,6 +67,11 @@ export const TimerBlock = styled.div<TimerProps>`
         z-index: 4;
         animation: ${maskRight} ${({duration}) => duration}s steps(1, end) forwards;
         animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 115px;
+        height: 115px;
     }
 `;
 
@@ -101,10 +106,20 @@ export const TimerBody = styled.div`
     background-color: white;
     border-radius: 50%;
     z-index: 5;
+
+    @media screen and (max-width: 500px) {
+        width: 100px;
+        height: 100px;
+    }
 `;
 
 export const TimerCounter = styled.div`
     font-size: 40px;
     margin-top: 45px;
     color: ${({color}) => color};
+
+    @media screen and (max-width: 500px) {
+        font-size: 30px;
+        margin-top: 35px;
+    }
 `;
