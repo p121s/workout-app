@@ -8,6 +8,8 @@ import Timer from '../../components/Timer/Timer';
 import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
 import { Exercise } from '../pages.interfaces';
+import { BlockSpiner } from '../../components/shared/shared.styled';
+import { PropagateLoader } from 'react-spinners';
 
 export default function WorkoutPage() {
 
@@ -106,12 +108,15 @@ export default function WorkoutPage() {
                                 </ButtomPrewNext>
                             </div>
                         </MainBlockTimer>
-                        <Video
+                        {currentWorkout ? <Video
                             exerciseVideo={currentWorkout[currentExerciseNum]?.video}
                             poster={currentWorkout[currentExerciseNum]?.photo} 
                             isPause={isPause}
                             isReady={isReady}
-                        />
+                        /> : <BlockSpiner>
+                        <PropagateLoader color={'#AA00FF'} />
+                    </BlockSpiner>}
+                        
                         <PauseDiv>
                             <PauseButton onClick={paused}>
                                 {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}

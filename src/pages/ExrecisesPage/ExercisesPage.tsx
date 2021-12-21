@@ -8,8 +8,10 @@ import ExerciseCardMini from '../../components/ExerciseCardMini/ExerciseCardMini
 import WorkoutDayCard from '../../components/WorkoutDayCard/WorkoutDayCard';
 import background from '../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg';
 import { BlockAllExercises, HR } from './ExercisesPage.styled';
+import { BlockSpiner } from '../../components/shared/shared.styled';
 import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
+import { PropagateLoader } from 'react-spinners';
 
 export default function ExercisesPage() {
 
@@ -39,28 +41,33 @@ export default function ExercisesPage() {
         <>
             {/* <h1>&#8629;</h1> */}
             <WorkoutDayCard
-                backgroundSrc={`${background}`}
-                day={1}
-                workoutName='Morning Flexibility Routine'
-                workoutDescription='Easy • 15 min • No equipment'
-             />
-            <BlockAllExercises>
-            {questions ? questions.map((question: any) => (
-                <React.Fragment key={question.title}>
-                    <HR />
-                    <h3>{question.title}</h3>
-                    {question.exercises.map((exercise: any) => (
-                        
-                        <ExerciseCardMini
-                            key={exercise.id}
-                            src={exercise.photo}
-                            title={exercise.title}
-                            duration={exercise.duration}
-                         />
-                    ))}
-                </React.Fragment>
-            )) : 'loading'}
-            </BlockAllExercises>
+                    backgroundSrc={`${background}`}
+                    day={1}
+                    workoutName='Morning Flexibility Routine'
+                    workoutDescription='Easy • 15 min • No equipment'
+                />
+            {allExercises ? <>
+                <BlockAllExercises>
+                {questions ? questions.map((question: any) => (
+                    <React.Fragment key={question.title}>
+                        <HR />
+                        <h3>{question.title}</h3>
+                        {question.exercises.map((exercise: any) => (
+                            
+                            <ExerciseCardMini
+                                key={exercise.id}
+                                src={exercise.photo}
+                                title={exercise.title}
+                                duration={exercise.duration}
+                            />
+                        ))}
+                    </React.Fragment>
+                )) : 'loading'}
+                </BlockAllExercises>)
+            </> : <BlockSpiner>
+                <PropagateLoader color={'#AA00FF'} />
+            </BlockSpiner>}
+            
             <Link to='/workout'>
                 <SpanInLink>{localStorage.getItem('currentExerciseNum') === '0' ? 'Start Workout' : 'Resume'}</SpanInLink>
             </Link>
