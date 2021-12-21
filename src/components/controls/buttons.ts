@@ -37,9 +37,10 @@ export const ButtomPrewNext = styled.button<ButtPrewNxt>`
 `;
 
 export const PauseButton = styled.button`
-    padding: 19px 15px;
+    width: 50px;
+    height: 50px;
     border: none;
-    border-radius: 40px;
+    border-radius: 50%;
     background-color: #AA00FF;
     color: white;
     font-weight: bold;

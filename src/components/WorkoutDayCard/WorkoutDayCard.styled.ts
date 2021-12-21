@@ -9,6 +9,7 @@ export const MainDivDayCard = styled.div<DivProps>`
     height: 450px;
     border-radius: 7px;
     background: url("${({background}) => background}") center / cover no-repeat gray;
+    box-sizing: border-box;
 
     @media screen and (max-width: 500px) {
         border-radius: 0px;

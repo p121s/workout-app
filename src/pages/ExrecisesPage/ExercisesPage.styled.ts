@@ -10,4 +10,5 @@ export const HR = styled.hr`
 export const BlockAllExercises = styled.div`
     width: 90%;
     padding: 0 20px;
+    box-sizing: border-box;
 `;
