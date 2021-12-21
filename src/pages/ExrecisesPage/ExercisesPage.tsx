@@ -69,7 +69,7 @@ export default function ExercisesPage() {
             </BlockSpiner>}
             
             <Link to='/workout'>
-                <SpanInLink>{localStorage.getItem('currentExerciseNum') === '0' ? 'Start Workout' : 'Resume'}</SpanInLink>
+                <SpanInLink>{localStorage.getItem('currentExerciseNum') ? 'Resume' : 'Start Workout'}</SpanInLink>
             </Link>
         </>
     );
