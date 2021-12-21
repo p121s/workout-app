@@ -48,7 +48,7 @@ export default function ExercisesPage() {
                 />
             {allExercises ? <>
                 <BlockAllExercises>
-                {questions ? questions.map((question: any) => (
+                {questions.map((question: any) => (
                     <React.Fragment key={question.title}>
                         <HR />
                         <h3>{question.title}</h3>
@@ -62,8 +62,8 @@ export default function ExercisesPage() {
                             />
                         ))}
                     </React.Fragment>
-                )) : 'loading'}
-                </BlockAllExercises>)
+                ))}
+                </BlockAllExercises>
             </> : <BlockSpiner>
                 <PropagateLoader color={'#AA00FF'} />
             </BlockSpiner>}

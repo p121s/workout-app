@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
-// import { useDispatch } from 'react-redux';
 import { MainBlockTimer, PauseDiv } from './WorkoutPage.styled';
 import { ButtomPrewNext, PauseButton } from '../../components/controls/buttons';
 import { RootStateOrAny, useSelector } from 'react-redux';
