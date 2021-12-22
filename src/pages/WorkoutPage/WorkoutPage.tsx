@@ -80,7 +80,7 @@ export default function WorkoutPage() {
                 !isComplete ? (
                     <>
                         <h2>{title}</h2>
-                        <Styled.MainBlockTimer className='main_block-timer'>
+                        <Styled.MainBlockTimer>
                             <div>
                                 <Controls.ButtomPrewNext
                                     disabled={currentExerciseNum === 0 ? true : false}
@@ -92,9 +92,7 @@ export default function WorkoutPage() {
                                     &#10073;&#9664;
                                 </Controls.ButtomPrewNext>
                             </div>
-                            <div className='timer-wrapper'>
                                 <Timer sec={counter} color={colorTimer} duration={duration} isPause={isPause} />
-                            </div>
                             <div>
                                 <Controls.ButtomPrewNext
                                     disabled={currentExerciseNum === currentWorkout.length - 1 ? true : false}
