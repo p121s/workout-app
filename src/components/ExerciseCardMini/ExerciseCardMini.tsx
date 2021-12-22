@@ -3,7 +3,6 @@ import { MainDiv, DivImage, Image, DivText, ParNameExercise, ParTime } from './E
 
 export default function ExerciseCardMini({src, title, duration}: any) {
     return (
-        <>
             <MainDiv>
                 <DivImage>
                     <Image src={src} alt='Exercise' />
@@ -17,6 +16,5 @@ export default function ExerciseCardMini({src, title, duration}: any) {
                     </ParTime>
                 </DivText>
             </MainDiv>
-        </>
     );
 }
