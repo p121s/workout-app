@@ -113,7 +113,7 @@ export default function WorkoutPage() {
                             isPause={isPause}
                             isReady={isReady}
                         /> : <BlockSpiner>
-                        <PropagateLoader color={`${(props: any) => props.theme.colors.purple}`} />
+                        <PropagateLoader color={`#AA00FF`} />
                     </BlockSpiner>}
                         
                         <PauseDiv>

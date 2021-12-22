@@ -13,7 +13,7 @@ import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
 import { PropagateLoader } from 'react-spinners';
 
-export default function ExercisesPage(props: any) {
+export default function ExercisesPage() {
 
     const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -64,7 +64,7 @@ export default function ExercisesPage(props: any) {
                 ))}
                 </BlockAllExercises>
             </> : <BlockSpiner>
-                <PropagateLoader color={`${(props: any) => props.theme.colors.purple}`} />
+                <PropagateLoader color={`#AA00FF`} />
             </BlockSpiner>}
             
             <Link to='/workout'>
