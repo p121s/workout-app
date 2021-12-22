@@ -1,19 +1,19 @@
 import React from 'react';
-import { TimerBlock, TimerLine, TimerBody, TimerCounter } from './Timer.styled';
+import * as Styled from './Timer.styled';
 
 export default function Timer({sec, color, duration, isPause}: any) {
     return (
         <>
             {
                 sec !== -1 ? (
-                <TimerBlock color={color} duration={duration} isPause={isPause}>
-                        <TimerLine color={color} duration={duration} isPause={isPause}></TimerLine>
-                        <TimerBody>
-                            <TimerCounter color={color}>
+                <Styled.TimerBlock color={color} duration={duration} isPause={isPause}>
+                        <Styled.TimerLine color={color} duration={duration} isPause={isPause}></Styled.TimerLine>
+                        <Styled.TimerBody>
+                            <Styled.TimerCounter color={color}>
                                 {sec}
-                            </TimerCounter>
-                        </TimerBody>
-                    </TimerBlock>
+                            </Styled.TimerCounter>
+                        </Styled.TimerBody>
+                    </Styled.TimerBlock>
                 ) : (
                     ''
                 )  

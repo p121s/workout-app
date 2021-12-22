@@ -93,7 +93,7 @@ export const TimerLine = styled.div<TimerProps>`
         left: 0;
         width: 50%;
         height: 100%;
-        background-color: white;
+        background-color: ${(props: any) => props.theme.colors.white};
     }
 `;
 
@@ -103,7 +103,7 @@ export const TimerBody = styled.div`
     aling-items: center;
     width: 135px;
     height: 135px;
-    background-color: white;
+    background-color: ${(props: any) => props.theme.colors.white};
     border-radius: 50%;
     z-index: 5;
 

@@ -1,14 +1,14 @@
 import React from 'react';
-import { MainDivDayCard, ParDayNumber, ParWorkoutDescription, ParWorkoutName } from './WorkoutDayCard.styled';
+import * as Styled from './WorkoutDayCard.styled';
 
 export default function WorkoutDayCard({backgroundSrc, day, workoutName, workoutDescription}: any) {
 
     return (
         <>
-            <MainDivDayCard background={backgroundSrc}></MainDivDayCard>
-            <ParDayNumber>Day {day}</ParDayNumber>
-            <ParWorkoutName>{workoutName}</ParWorkoutName>
-            <ParWorkoutDescription>{workoutDescription}</ParWorkoutDescription>
+            <Styled.MainDivDayCard background={backgroundSrc}></Styled.MainDivDayCard>
+            <Styled.ParDayNumber>Day {day}</Styled.ParDayNumber>
+            <Styled.ParWorkoutName>{workoutName}</Styled.ParWorkoutName>
+            <Styled.ParWorkoutDescription>{workoutDescription}</Styled.ParWorkoutDescription>
         </>
     );
 }

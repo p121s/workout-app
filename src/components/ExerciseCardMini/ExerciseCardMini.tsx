@@ -1,20 +1,20 @@
 import React from 'react';
-import { MainDiv, DivImage, Image, DivText, ParNameExercise, ParTime } from './ExerciseCardMini.styled';
+import  * as Styled  from './ExerciseCardMini.styled';
 
 export default function ExerciseCardMini({src, title, duration}: any) {
     return (
-            <MainDiv>
-                <DivImage>
-                    <Image src={src} alt='Exercise' />
-                </DivImage>
-                <DivText>
-                    <ParNameExercise>
+            <Styled.MainDiv>
+                <Styled.DivImage>
+                    <Styled.Image src={src} alt='Exercise' />
+                </Styled.DivImage>
+                <Styled.DivText>
+                    <Styled.ParNameExercise>
                         {title}
-                    </ParNameExercise>
-                    <ParTime>
+                    </Styled.ParNameExercise>
+                    <Styled.ParTime>
                         {duration} sec
-                    </ParTime>
-                </DivText>
-            </MainDiv>
+                    </Styled.ParTime>
+                </Styled.DivText>
+            </Styled.MainDiv>
     );
 }
