@@ -11,7 +11,7 @@ import { BlockAllExercises, HR } from './ExercisesPage.styled';
 import { BlockSpiner } from '../../components/shared/shared.styled';
 import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
-import { PropagateLoader } from 'react-spinners';
+import { Spinner } from './ExercisesPage.styled';
 
 export default function ExercisesPage() {
 
@@ -64,7 +64,7 @@ export default function ExercisesPage() {
                 ))}
                 </BlockAllExercises>
             </> : <BlockSpiner>
-                <PropagateLoader color={`#AA00FF`} />
+                <Spinner />
             </BlockSpiner>}
             
             <Link to='/workout'>

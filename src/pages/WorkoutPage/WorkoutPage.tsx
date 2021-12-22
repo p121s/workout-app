@@ -8,7 +8,7 @@ import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
 import { Exercise } from '../pages.interfaces';
 import { BlockSpiner } from '../../components/shared/shared.styled';
-import { PropagateLoader } from 'react-spinners';
+import { Spinner } from '../ExrecisesPage/ExercisesPage.styled';
 
 export default function WorkoutPage() {
 
@@ -110,7 +110,7 @@ export default function WorkoutPage() {
                             isPause={isPause}
                             isReady={isReady}
                         /> : <BlockSpiner>
-                        <PropagateLoader color={`#AA00FF`} />
+                        <Spinner />
                     </BlockSpiner>}
                         
                         <Styled.PauseDiv>
