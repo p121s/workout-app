@@ -8,7 +8,7 @@ export const HR = styled.hr`
 `;
 
 export const BlockAllExercises = styled.div`
-    width: 90%;
+    width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
 `;
