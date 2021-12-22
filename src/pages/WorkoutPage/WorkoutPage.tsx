@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react';
-import { MainBlockTimer, PauseDiv } from './WorkoutPage.styled';
-import { ButtomPrewNext, PauseButton } from '../../components/controls/buttons';
+import * as Styled from './WorkoutPage.styled';
+import * as Controls from '../../components/controls/buttons';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import Timer from '../../components/Timer/Timer';
 import Video from '../../components/Video/Video';
@@ -75,14 +75,14 @@ export default function WorkoutPage() {
     };
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <Styled.MainBlockWorkout>
             {
                 !isComplete ? (
                     <>
                         <h2>{title}</h2>
-                        <MainBlockTimer className='main_block-timer'>
+                        <Styled.MainBlockTimer className='main_block-timer'>
                             <div>
-                                <ButtomPrewNext
+                                <Controls.ButtomPrewNext
                                     disabled={currentExerciseNum === 0 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
@@ -90,13 +90,13 @@ export default function WorkoutPage() {
                                     }}
                                 >
                                     &#10073;&#9664;
-                                </ButtomPrewNext>
+                                </Controls.ButtomPrewNext>
                             </div>
                             <div className='timer-wrapper'>
                                 <Timer sec={counter} color={colorTimer} duration={duration} isPause={isPause} />
                             </div>
                             <div>
-                                <ButtomPrewNext
+                                <Controls.ButtomPrewNext
                                     disabled={currentExerciseNum === currentWorkout.length - 1 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
@@ -104,29 +104,28 @@ export default function WorkoutPage() {
                                     }}
                                 >
                                     &#9654;&#10073;
-                                </ButtomPrewNext>
+                                </Controls.ButtomPrewNext>
                             </div>
-                        </MainBlockTimer>
+                        </Styled.MainBlockTimer>
                         {currentWorkout ? <Video
                             exerciseVideo={currentWorkout[currentExerciseNum]?.video}
-                            poster={currentWorkout[currentExerciseNum]?.photo} 
                             isPause={isPause}
                             isReady={isReady}
                         /> : <BlockSpiner>
                         <PropagateLoader color={`#AA00FF`} />
                     </BlockSpiner>}
                         
-                        <PauseDiv>
-                            <PauseButton onClick={paused}>
+                        <Styled.PauseDiv>
+                            <Controls.PauseButton onClick={paused}>
                                 {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
-                            </PauseButton>
-                        </PauseDiv>
+                            </Controls.PauseButton>
+                        </Styled.PauseDiv>
                     </>
                 ) : (
-                    <CompletePage workoutTime={((workoutTime + 1) / 60).toFixed(2)} />
+                    <CompletePage workoutTime={+((workoutTime + 1) / 60).toFixed(2)} />
                 )
             }
             
-        </div>
+        </Styled.MainBlockWorkout>
     );
 }

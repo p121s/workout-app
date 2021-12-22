@@ -1,8 +1,5 @@
 import styled from "styled-components";
-
-interface DivProps {
-    background: string,
-}
+import { DivProps } from "./WorkoutDayCard.interfases";
 
 export const MainDivDayCard = styled.div<DivProps>`
     width: 100%;

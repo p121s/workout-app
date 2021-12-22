@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const MainBlockWorkout = styled.div`
+    text-align: center;
+`;
+
 export const MainBlockTimer = styled.div`
     display: flex;
     align-items: center;
@@ -9,6 +13,7 @@ export const MainBlockTimer = styled.div`
 
 export const PauseDiv = styled.div`
     position: fixed;
+    text-align: center;
     width: 100%;
     padding: 15px 0;
     left: 0;

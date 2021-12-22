@@ -4,3 +4,7 @@ export interface WorkoutDayCardProps {
     workoutName: string, 
     workoutDescription: string,
 }
+
+export interface DivProps {
+    background: string,
+}

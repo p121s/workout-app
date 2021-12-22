@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
+import { VideoProps } from './Video.interfaces';
 
-export default function Video({exerciseVideo, poster, isPause, isReady}: any) {
+export default function Video({exerciseVideo, isPause, isReady}: VideoProps) {
 
     const video = useRef<any>();
 

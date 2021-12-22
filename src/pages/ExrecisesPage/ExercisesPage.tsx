@@ -30,7 +30,7 @@ export default function ExercisesPage() {
     }, [allExercises]);
 
     useEffect(() => {
-        questions && setThisCurrentWorkout(questions.map(({exercises}: any) => exercises).flat());
+        questions && setThisCurrentWorkout(questions.map(({exercises}) => exercises).flat());
     }, [questions])
 
     useEffect(() => {
@@ -47,11 +47,11 @@ export default function ExercisesPage() {
                 />
             {allExercises ? <>
                 <BlockAllExercises>
-                {questions.map((question: any) => (
+                {questions.map((question: Question) => (
                     <React.Fragment key={question.title}>
                         <HR />
                         <h3>{question.title}</h3>
-                        {question.exercises.map((exercise: any) => (
+                        {question.exercises.map((exercise: Exercise) => (
                             
                             <ExerciseCardMini
                                 key={exercise.id}

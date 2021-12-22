@@ -1,7 +1,8 @@
 import React from 'react';
 import  * as Styled  from './ExerciseCardMini.styled';
+import { ExerciseCardMiniProps } from './ExerciseCardMini.interfases';
 
-export default function ExerciseCardMini({src, title, duration}: any) {
+export default function ExerciseCardMini({src, title, duration}: ExerciseCardMiniProps) {
     return (
             <Styled.MainDiv>
                 <Styled.DivImage>

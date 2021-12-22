@@ -5,7 +5,7 @@ export const SpanInLink = styled.span`
     width: 55.6%;
     text-align: center;
     padding: 20px;
-    background-color: ${(props: any) => props.theme.colors.purple};
+    background-color: ${(props) => props.theme.colors.purple};
     border: none;
     border-radius: 5px;
     position: fixed;
@@ -41,7 +41,7 @@ export const PauseButton = styled.button`
     height: 50px;
     border: none;
     border-radius: 50%;
-    background-color: ${(props: any) => props.theme.colors.purple};
+    background-color: ${(props) => props.theme.colors.purple};
     color: white;
     font-weight: bold;
 `;
