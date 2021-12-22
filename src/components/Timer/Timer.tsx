@@ -1,7 +1,8 @@
 import React from 'react';
 import * as Styled from './Timer.styled';
+import { TimerProps } from './Timer.interfases';
 
-export default function Timer({sec, color, duration, isPause}: any) {
+export default function Timer({sec, color, duration, isPause}: TimerProps) {
     return (
         <>
             {

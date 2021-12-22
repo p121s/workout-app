@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { TimerProps } from "./Timer.interfases";
+import { TimerLineAngBlockProps } from "./Timer.interfases";
 
 const lineRotate = keyframes`
     0% {}
@@ -32,7 +32,7 @@ const maskRight = keyframes`
     }
 `;
 
-export const TimerBlock = styled.div<TimerProps>`
+export const TimerBlock = styled.div<TimerLineAngBlockProps>`
     position: relative;
     display: flex;
     justify-content: center;
@@ -75,7 +75,7 @@ export const TimerBlock = styled.div<TimerProps>`
     }
 `;
 
-export const TimerLine = styled.div<TimerProps>`
+export const TimerLine = styled.div<TimerLineAngBlockProps>`
     position: absolute;
     top: 0;
     left: 0;

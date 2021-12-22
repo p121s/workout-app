@@ -1,7 +1,8 @@
 import React from 'react';
 import * as Styled from './WorkoutDayCard.styled';
+import { WorkoutDayCardProps } from './WorkoutDayCard.interfases';
 
-export default function WorkoutDayCard({backgroundSrc, day, workoutName, workoutDescription}: any) {
+export default function WorkoutDayCard({backgroundSrc, day, workoutName, workoutDescription}: WorkoutDayCardProps) {
 
     return (
         <>
