@@ -5,7 +5,7 @@ export const SpanInLink = styled.span`
     width: 55.6%;
     text-align: center;
     padding: 20px;
-    background-color: #AA00FF;
+    background-color: ${(props: any) => props.theme.colors.purple};
     border: none;
     border-radius: 5px;
     position: fixed;
@@ -26,8 +26,8 @@ export const ButtomPrewNext = styled.button<ButtPrewNxt>`
     height: 50px;
     background: white;
     border-radius: 7px;
-    border: 2px solid ${({disabled}) => disabled ? 'gray' : '#AA00FF'} ;
-    color: ${({disabled}) => disabled ? 'gray' : '#AA00FF'};
+    border: 2px solid ${({disabled, theme: {colors}}) => disabled ? colors.gray : colors.purple};
+    color: ${({disabled, theme: {colors}}) => disabled ? colors.gray : colors.purple};
     margin: 10px;
 
     @media screen and (max-width: 500px) {
@@ -41,7 +41,7 @@ export const PauseButton = styled.button`
     height: 50px;
     border: none;
     border-radius: 50%;
-    background-color: #AA00FF;
+    background-color: ${(props: any) => props.theme.colors.purple};
     color: white;
     font-weight: bold;
 `;

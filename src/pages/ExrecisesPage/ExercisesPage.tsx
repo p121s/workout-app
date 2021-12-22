@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getAllExercises } from '../../store/reduserAllExercises/asyncActions';
-import { setCurrentWorkout } from '../../store/reducerCurrentWorkout/actionCreators';
+import { getAllExercises } from '../../store/allExercises/asyncActions';
+import { setCurrentWorkout } from '../../store/currentWorkout/actionCreators';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ExerciseCardMini from '../../components/ExerciseCardMini/ExerciseCardMini';
@@ -13,7 +13,7 @@ import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
 import { PropagateLoader } from 'react-spinners';
 
-export default function ExercisesPage() {
+export default function ExercisesPage(props: any) {
 
     const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -39,7 +39,6 @@ export default function ExercisesPage() {
 
     return (
         <>
-            {/* <h1>&#8629;</h1> */}
             <WorkoutDayCard
                     backgroundSrc={`${background}`}
                     day={1}
@@ -65,7 +64,7 @@ export default function ExercisesPage() {
                 ))}
                 </BlockAllExercises>
             </> : <BlockSpiner>
-                <PropagateLoader color={'#AA00FF'} />
+                <PropagateLoader color={`${(props: any) => props.theme.colors.purple}`} />
             </BlockSpiner>}
             
             <Link to='/workout'>

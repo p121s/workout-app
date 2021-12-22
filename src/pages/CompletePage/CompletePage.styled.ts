@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CheckMarkPar = styled.p`
-    color: #1DE9B6;
+    color: ${(props: any) => props.theme.colors.lightGreen};
     font-size: 40px;
 `;
 

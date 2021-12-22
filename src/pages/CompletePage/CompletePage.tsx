@@ -9,7 +9,6 @@ export default function CompletePage({workoutTime}: any) {
             <CheckMarkPar>&#10003;</CheckMarkPar>
             <MainPar>Workout Completed!</MainPar>
             <SecondPar>Nice job. You're done. Here's the workout summary.</SecondPar>
-            {/* <p>Burned Calories</p> */}
             <MinutesPar>Minutes</MinutesPar>
             <NumberPar>{workoutTime}</NumberPar>
             <Link to='/'>

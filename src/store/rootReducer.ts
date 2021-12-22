@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import reducerAllExercises from './reduserAllExercises/reducerAllExercises';
-import reducerCurrentWorkout from './reducerCurrentWorkout/reducerCurrentWorkout';
+import reducerAllExercises from './allExercises/reducer';
+import reducerCurrentWorkout from './currentWorkout/reducer';
 
 export const rootReducer = combineReducers({
     reducerAllExercises,
