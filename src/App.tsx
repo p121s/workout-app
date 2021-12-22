@@ -3,16 +3,19 @@ import ExercisesPage from './pages/ExrecisesPage/ExercisesPage';
 import { Routes, Route } from 'react-router';
 import WorkoutPage from './pages/WorkoutPage/WorkoutPage';
 import { AppBlock } from './App.styled';
+import Theme from './theme/Theme';
 
 function App() {
 
   return (
-    <AppBlock>
-      <Routes>
-        <Route path='/' element={<ExercisesPage />} />
-        <Route path='/workout' element={<WorkoutPage />} />
-      </Routes>
-    </AppBlock>
+      <Theme>
+          <AppBlock>
+              <Routes>
+                  <Route path='/' element={<ExercisesPage />} />
+                  <Route path='/workout' element={<WorkoutPage />} />
+              </Routes>
+          </AppBlock>
+      </Theme>
   );
 }
 
