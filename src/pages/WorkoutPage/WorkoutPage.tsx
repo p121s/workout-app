@@ -8,7 +8,7 @@ import Video from '../../components/Video/Video';
 import CompletePage from '../CompletePage/CompletePage';
 import { Exercise } from '../pages.interfaces';
 import { BlockSpiner } from '../../components/shared/shared.styled';
-import { Spinner } from '../ExrecisesPage/ExercisesPage.styled';
+import { Spinner } from '../../components/shared/shared.styled';
 
 export default function WorkoutPage() {
 

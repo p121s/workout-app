@@ -11,7 +11,7 @@ import { BlockAllExercises, HR } from './ExercisesPage.styled';
 import { BlockSpiner } from '../../components/shared/shared.styled';
 import { SpanInLink } from '../../components/controls/buttons';
 import { Exercise, Question } from '../pages.interfaces';
-import { Spinner } from './ExercisesPage.styled';
+import { Spinner } from '../../components/shared/shared.styled';
 
 export default function ExercisesPage() {
 
