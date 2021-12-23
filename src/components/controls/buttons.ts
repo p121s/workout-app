@@ -41,7 +41,7 @@ export const PauseButton = styled.button`
     height: 50px;
     border: none;
     border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.purple};
+    background-color: ${({theme}) => theme.colors.purple};
     color: white;
     font-weight: bold;
 `;

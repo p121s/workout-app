@@ -7,7 +7,7 @@ export default function Timer({sec, color, duration, isPause}: TimerProps) {
         <>
             {
                 sec !== -1 ? (
-                <Styled.TimerBlock color={color} duration={duration} isPause={isPause}>
+                    <Styled.TimerBlock color={color} duration={duration} isPause={isPause}>
                         <Styled.TimerLine color={color} duration={duration} isPause={isPause}></Styled.TimerLine>
                         <Styled.TimerBody>
                             <Styled.TimerCounter color={color}>
