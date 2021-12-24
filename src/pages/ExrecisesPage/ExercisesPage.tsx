@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getAllExercises } from '../../store/allExercises/asyncActions';
-import { setCurrentWorkout } from '../../store/currentWorkout/actionCreators';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ExerciseCardMini from '../../components/ExerciseCardMini/ExerciseCardMini';
@@ -17,25 +14,10 @@ export default function ExercisesPage() {
 
     const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [currentWorkout, setThisCurrentWorkout] = useState<Exercise[]>([]);
-
-    const dispatch = useDispatch();
   
-    useEffect(() => {
-        dispatch(getAllExercises());
-    }, [dispatch]);
-
     useEffect(() => {
         allExercises && setQuestions(allExercises.data.questions);
     }, [allExercises]);
-
-    useEffect(() => {
-        questions && setThisCurrentWorkout(questions.map(({exercises}) => exercises).flat());
-    }, [questions])
-
-    useEffect(() => {
-        dispatch(setCurrentWorkout(currentWorkout));
-    }, [currentWorkout, dispatch])
 
     return (
         <>

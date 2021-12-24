@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { SpanInLink } from "../../components/controls/buttons";
 import * as Styled from "./CompletePage.styled";

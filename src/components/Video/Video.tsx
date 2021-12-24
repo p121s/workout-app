@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { VideoProps } from './Video.interfaces';
 
 export default function Video({exerciseVideo, isPause, isReady}: VideoProps) {

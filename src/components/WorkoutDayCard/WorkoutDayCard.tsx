@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Styled from './WorkoutDayCard.styled';
 import { WorkoutDayCardProps } from './WorkoutDayCard.interfases';
 

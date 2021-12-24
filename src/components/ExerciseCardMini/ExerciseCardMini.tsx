@@ -1,4 +1,3 @@
-import React from 'react';
 import  * as Styled  from './ExerciseCardMini.styled';
 import { ExerciseCardMiniProps } from './ExerciseCardMini.interfases';
 

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as Styled from './WorkoutPage.styled';
 import * as Controls from '../../components/controls/buttons';
 import { RootStateOrAny, useSelector } from 'react-redux';
@@ -11,8 +11,8 @@ import { BlockSpiner } from '../../components/shared/shared.styled';
 import { Spinner } from '../../components/shared/shared.styled';
 
 export default function WorkoutPage() {
-
-    const currentWorkout: Exercise[] = useSelector((currentWorkout: RootStateOrAny) => currentWorkout.reducerCurrentWorkout.currentWorkout);
+    const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
+    const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
     const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(Number(localStorage.getItem('currentExerciseNum')));
     const [duration, setDuration] = useState<number>(6);
     const [counter, setCounter] = useState<number>(5);
@@ -26,11 +26,15 @@ export default function WorkoutPage() {
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
     useEffect(() => {
+        allExercises && setCurrentWorkout(allExercises.data.questions.map(({exercises}: any) => exercises).flat());
+    }, [allExercises])
+
+    useEffect(() => {
         localStorage.setItem('currentExerciseNum', `${currentExerciseNum}`);
     }, [currentExerciseNum]);
 
     useEffect(() => {
-        if(currentExerciseNum !== 0 && currentExerciseNum >= currentWorkout.length) {
+        if(currentExerciseNum !== 0 && currentWorkout.length && currentExerciseNum >= currentWorkout.length) {
             clearTimeout(currentTimeout.current);
             setIsComplete(true);
             localStorage.clear();

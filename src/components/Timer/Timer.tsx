@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Styled from './Timer.styled';
 import { TimerProps } from './Timer.interfases';
 
