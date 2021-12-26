@@ -19,6 +19,13 @@ export default function ExercisesPage() {
         allExercises && setQuestions(allExercises.data.questions);
     }, [allExercises]);
 
+    useEffect(() => {
+        questions && localStorage.setItem(
+            'exercisesId',
+            `${questions.map((question: Question) => question.exercises.map((exercise: Exercise) => exercise.id)).flat()}`
+        );
+    }, [questions])
+
     return (
         <>
             <WorkoutDayCard

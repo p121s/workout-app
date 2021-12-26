@@ -11,9 +11,10 @@ import { BlockSpiner } from '../../components/shared/shared.styled';
 import { Spinner } from '../../components/shared/shared.styled';
 
 export default function WorkoutPage() {
-    const allExercises = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
-    const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
+    const allWorkout = useSelector((allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data);
+    const [exercisesId] = useState(localStorage.getItem('exercisesId')?.split(',').map(id => +id));
     const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(Number(localStorage.getItem('currentExerciseNum')));
+    const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
     const [duration, setDuration] = useState<number>(6);
     const [counter, setCounter] = useState<number>(5);
     const [colorTimer, setColorTimer] = useState<string>('#1DE9B6');
@@ -26,8 +27,11 @@ export default function WorkoutPage() {
     const [isComplete, setIsComplete] = useState<boolean>(false);
 
     useEffect(() => {
-        allExercises && setCurrentWorkout(allExercises.data.questions.map(({exercises}: any) => exercises).flat());
-    }, [allExercises]);
+        const tempArrayAllExercises = allWorkout && allWorkout.data.questions.map(({exercises}: any) => exercises).flat();
+        allWorkout && setCurrentWorkout(tempArrayAllExercises
+            .filter((exercise: Exercise) => exercise.id === exercisesId
+            ?.find(id => id === exercise.id)));
+    }, [allWorkout]);
 
     useEffect(() => {
         localStorage.setItem('currentExerciseNum', `${currentExerciseNum}`);
