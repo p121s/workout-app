@@ -14,7 +14,7 @@ export default function Video({exerciseVideo, isPause, isReady}: VideoProps) {
     }, [isPause, isReady])
 
     return (
-            <video ref={video} src={`${exerciseVideo}`} autoPlay loop width="100%">
+            <video ref={video} src={`${exerciseVideo}`} muted loop width="100%">
                 <source type="video/mp4" />
             </video>        
     );

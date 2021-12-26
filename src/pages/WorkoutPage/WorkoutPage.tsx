@@ -27,7 +27,7 @@ export default function WorkoutPage() {
 
     useEffect(() => {
         allExercises && setCurrentWorkout(allExercises.data.questions.map(({exercises}: any) => exercises).flat());
-    }, [allExercises])
+    }, [allExercises]);
 
     useEffect(() => {
         localStorage.setItem('currentExerciseNum', `${currentExerciseNum}`);
@@ -54,6 +54,7 @@ export default function WorkoutPage() {
                 }, 1000);
             }
         }
+        return () => clearTimeout(currentTimeout.current);
     }, [counter, isReady, isPause]);
 
     const nextExercise = () => {
