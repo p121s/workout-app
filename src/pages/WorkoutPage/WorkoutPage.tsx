@@ -59,7 +59,7 @@ export default function WorkoutPage() {
             }
         }
         return () => clearTimeout(currentTimeout.current);
-    }, [counter, isReady, isPause]);
+    }, [counter, isReady, isPause, currentTimeout.current]);
 
     const nextExercise = () => {
         setCounter(currentWorkout[currentExerciseNum].duration);
