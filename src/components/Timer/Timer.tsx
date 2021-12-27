@@ -1,11 +1,11 @@
 import * as Styled from './Timer.styled';
 import { TimerProps } from './Timer.interfases';
 
-export default function Timer({sec, color, duration, isPause}: TimerProps) {
+export default function Timer({sec, color, duration, isPause, isStart}: TimerProps) {
     return (
         <>
             {
-                sec !== -1 ? (
+                sec !== -1 && !isStart ? (
                     <Styled.TimerBlock color={color} duration={duration} isPause={isPause}>
                         <Styled.TimerLine color={color} duration={duration} isPause={isPause}></Styled.TimerLine>
                         <Styled.TimerBody>
@@ -14,8 +14,8 @@ export default function Timer({sec, color, duration, isPause}: TimerProps) {
                             </Styled.TimerCounter>
                         </Styled.TimerBody>
                     </Styled.TimerBlock>
-                ) : (
-                    ''
+            ) : (
+                'Working'
                 )  
             }
         </>

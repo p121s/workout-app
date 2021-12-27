@@ -25,6 +25,13 @@ export default function WorkoutPage() {
     const [isReady, setIsReady] = useState<boolean>(true);
     const [isPause, setIsPause] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
+    const [isTimerAnimatStart, setIsTimerAnimatStart] = useState(false);
+
+    useEffect(() => {
+        if(isTimerAnimatStart) {
+            setIsTimerAnimatStart(false);
+        }
+    }, [isTimerAnimatStart])
 
     useEffect(() => {
         const tempArrayAllExercises = allWorkout && allWorkout.data.questions.map(({exercises}: any) => exercises).flat();
@@ -95,18 +102,20 @@ export default function WorkoutPage() {
                                     disabled={currentExerciseNum === 0 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
+                                        setIsTimerAnimatStart(true);
                                         nextGetReady(-1);
                                     }}
                                 >
                                     &#10073;&#9664;
                                 </Controls.ButtomPrewNext>
                             </div>
-                                <Timer sec={counter} color={colorTimer} duration={duration} isPause={isPause} />
+                                <Timer sec={counter} color={colorTimer} duration={duration} isPause={isPause} isStart={isTimerAnimatStart} />
                             <div>
                                 <Controls.ButtomPrewNext
                                     disabled={currentExerciseNum === currentWorkout.length - 1 ? true : false}
                                     onClick={() => {
                                         currentTimeout.current && clearTimeout(currentTimeout.current);
+                                        setIsTimerAnimatStart(true);
                                         nextGetReady(1);
                                     }}
                                 >
