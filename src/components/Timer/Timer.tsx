@@ -15,7 +15,7 @@ export default function Timer({sec, color, duration, isPause, isStart}: TimerPro
                         </Styled.TimerBody>
                     </Styled.TimerBlock>
             ) : (
-                'Working'
+                ''
                 )  
             }
         </>
