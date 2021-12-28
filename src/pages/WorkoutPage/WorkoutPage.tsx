@@ -5,7 +5,8 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
-import { Exercise, Question } from "../pages.interfaces";
+import { Question } from "../Question.interfaces";
+import { Exercise } from "../Exercise.interfaces";
 import { BlockSpiner, Spinner } from "../../components/shared/shared.styled";
 
 export default function WorkoutPage(): JSX.Element {
@@ -23,7 +24,7 @@ export default function WorkoutPage(): JSX.Element {
     );
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
     const [duration, setDuration] = useState<number>(6);
-    const [counter, setCounter] = useState<number>(5);
+    const [timerCounter, setTimerCounter] = useState<number>(5);
     const [colorTimer, setColorTimer] = useState<string>("#1DE9B6");
     const [title, setTitle] = useState<string>("Get Ready");
     const [workoutTime, setWorkoutTime] = useState<number>(0);
@@ -74,22 +75,22 @@ export default function WorkoutPage(): JSX.Element {
 
     useEffect(() => {
         if (!isPause && !isComplete) {
-            if (counter === -1 && isReady) {
+            if (timerCounter === -1 && isReady) {
                 nextExercise();
-            } else if (counter === -1 && !isReady) {
+            } else if (timerCounter === -1 && !isReady) {
                 nextGetReady(1);
             } else {
                 currentTimeout.current = setTimeout(() => {
-                    setCounter(counter - 1);
+                    setTimerCounter(timerCounter - 1);
                     setWorkoutTime(workoutTime + 1);
                 }, 1000);
             }
         }
         return () => clearTimeout(currentTimeout.current);
-    }, [counter, isReady, isPause, currentTimeout.current]);
+    }, [timerCounter, isReady, isPause, currentTimeout.current]);
 
     const nextExercise = () => {
-        setCounter(currentWorkout[currentExerciseNum].duration);
+        setTimerCounter(currentWorkout[currentExerciseNum].duration);
         setDuration(currentWorkout[currentExerciseNum].duration + 1);
         setColorTimer("#FF4081");
         setIsReady(false);
@@ -98,7 +99,7 @@ export default function WorkoutPage(): JSX.Element {
 
     const nextGetReady = (prewOrNext: number) => {
         setCurrentExerciseNum(currentExerciseNum + prewOrNext);
-        setCounter(5);
+        setTimerCounter(5);
         setDuration(6);
         setColorTimer("#1DE9B6");
         setIsReady(true);
@@ -132,7 +133,7 @@ export default function WorkoutPage(): JSX.Element {
                             </Controls.ButtomPrewNext>
                         </div>
                         <Timer
-                            sec={counter}
+                            sec={timerCounter}
                             color={colorTimer}
                             duration={duration}
                             isPause={isPause}
