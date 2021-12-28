@@ -1,11 +1,10 @@
-import styled from 'styled-components';
-
+import styled from "styled-components";
 
 export const MainDiv = styled.div`
     display: flex;
     width: 100%;
     margin: 0 auto;
-    textAlign: left;
+    textalign: left;
     z-index: 5;
     transition: all 0.3s ease-out;
 
@@ -21,9 +20,7 @@ export const DivImage = styled.div`
     height: 74px;
 `;
 
-export const DivText = styled.div`
-
-`;
+export const DivText = styled.div``;
 
 export const Image = styled.img`
     margin: 5px;
@@ -33,7 +30,7 @@ export const Image = styled.img`
 `;
 
 export const Paragraph = styled.p`
-    margin: 12px 0; 
+    margin: 12px 0;
 `;
 
 export const ParNameExercise = styled(Paragraph)`

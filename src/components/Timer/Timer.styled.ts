@@ -50,10 +50,12 @@ export const TimerBlock = styled.div<TimerLineAngBlockProps>`
         left: 0;
         width: 50%;
         height: 100%;
-        background-color: ${({color}) => color};
+        background-color: ${({ color }) => color};
         z-index: 4;
-        animation: ${maskLeft} ${({duration}) => duration}s steps(1, end) forwards;
-        animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
+        animation: ${maskLeft} ${({ duration }) => duration}s steps(1, end)
+            forwards;
+        animation-play-state: ${({ isPause }) =>
+            isPause ? `paused` : `running`};
     }
 
     &:after {
@@ -65,8 +67,10 @@ export const TimerBlock = styled.div<TimerLineAngBlockProps>`
         height: 100%;
         background-color: white;
         z-index: 4;
-        animation: ${maskRight} ${({duration}) => duration}s steps(1, end) forwards;
-        animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
+        animation: ${maskRight} ${({ duration }) => duration}s steps(1, end)
+            forwards;
+        animation-play-state: ${({ isPause }) =>
+            isPause ? `paused` : `running`};
     }
 
     @media screen and (max-width: 500px) {
@@ -81,10 +85,10 @@ export const TimerLine = styled.div<TimerLineAngBlockProps>`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: ${({color}) => color};
+    background-color: ${({ color }) => color};
     border-radius: 50%;
-    animation: ${lineRotate} ${({duration}) => duration}s linear forwards;
-    animation-play-state: ${({isPause}) => isPause ? `paused` : `running`};
+    animation: ${lineRotate} ${({ duration }) => duration}s linear forwards;
+    animation-play-state: ${({ isPause }) => (isPause ? `paused` : `running`)};
 
     &:after {
         content: "";
@@ -116,7 +120,7 @@ export const TimerBody = styled.div`
 export const TimerCounter = styled.div`
     font-size: 40px;
     margin-top: 45px;
-    color: ${({color}) => color};
+    color: ${({ color }) => color};
 
     @media screen and (max-width: 500px) {
         font-size: 30px;

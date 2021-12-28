@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const MainBlockWorkout = styled.div`
     text-align: center;

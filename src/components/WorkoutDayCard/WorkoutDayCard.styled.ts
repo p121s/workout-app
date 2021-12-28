@@ -5,7 +5,8 @@ export const MainDivDayCard = styled.div<DivProps>`
     width: 100%;
     height: 450px;
     border-radius: 7px;
-    background: url("${({background}) => background}") center / cover no-repeat gray;
+    background: url("${({ background }) => background}") center / cover
+        no-repeat gray;
     box-sizing: border-box;
 
     @media screen and (max-width: 500px) {
@@ -29,6 +30,6 @@ export const ParWorkoutName = styled(ParagraphDayCard)`
     font-weight: bold;
 `;
 
- export const ParWorkoutDescription = styled(ParagraphDayCard)`
+export const ParWorkoutDescription = styled(ParagraphDayCard)`
     font-size: 13px;
- `;
+`;

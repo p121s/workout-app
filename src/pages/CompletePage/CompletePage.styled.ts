@@ -11,8 +11,7 @@ export const MainPar = styled.p`
 `;
 
 export const SecondPar = styled.p`
-    color: #B8B8B8;
-
+    color: #b8b8b8;
 `;
 
 export const MinutesPar = styled.p`

@@ -13,7 +13,7 @@ export interface MuscleGroup {
 }
 
 export interface Question {
-    exercises: Exercise[]
-    muscle_group: MuscleGroup
+    exercises: Exercise[];
+    muscle_group: MuscleGroup;
     title: string;
 }

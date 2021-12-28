@@ -1,21 +1,20 @@
-import { useEffect, useRef } from 'react';
-import { VideoProps } from './Video.interfaces';
+import { useEffect, useRef } from "react";
+import { VideoProps } from "./Video.interfaces";
 
-export default function Video({exerciseVideo, isPause, isReady}: VideoProps) {
-
+export default function Video({ exerciseVideo, isPause, isReady }: VideoProps): JSX.Element {
     const video = useRef<any>();
 
     useEffect(() => {
-        if((isPause && video.current) || isReady) {
+        if ((isPause && video.current) || isReady) {
             video.current.pause();
-        } else if((!isPause && video.current) || !isReady) {
+        } else if ((!isPause && video.current) || !isReady) {
             video.current.play();
         }
-    }, [isPause, isReady])
+    }, [isPause, isReady]);
 
     return (
-            <video ref={video} src={`${exerciseVideo}`} muted loop width="100%">
-                <source type="video/mp4" />
-            </video>        
+        <video ref={video} src={`${exerciseVideo}`} muted loop width="100%">
+            <source type="video/mp4" />
+        </video>
     );
 }

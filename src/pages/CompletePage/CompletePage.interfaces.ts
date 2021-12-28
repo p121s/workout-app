@@ -1,3 +1,3 @@
 export interface CompletePageProps {
-    workoutTime: number,
+    workoutTime: number;
 }
