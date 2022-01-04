@@ -20,4 +20,5 @@ export const PauseDiv = styled.div`
     bottom: 0;
     border-top: 3px solid lightgray;
     margin-top: 25px;
+    background-color: ${(props) => props.theme.colors.white}
 `;
