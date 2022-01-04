@@ -33,7 +33,7 @@ export default function WorkoutPage(): JSX.Element {
     const [isReady, setIsReady] = useState<boolean>(true);
     const [isPause, setIsPause] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
-    const [isTimerAnimatStart, setIsTimerAnimatStart] = useState(false);
+    const [isTimerAnimatStart, setIsTimerAnimatStart] = useState<boolean>(false);
 
     useEffect(() => {
         if (isTimerAnimatStart) {
