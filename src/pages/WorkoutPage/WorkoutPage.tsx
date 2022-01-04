@@ -44,18 +44,15 @@ export default function WorkoutPage(): JSX.Element {
     useEffect(() => {
         const tempArrayAllExercises =
             allWorkout &&
-            allWorkout.data.questions
-                .map((question: Question) => question.exercises)
-                .flat();
+            allWorkout.data.questions.map((question: Question) => question.exercises).flat();
         allWorkout &&
             setCurrentWorkout(
                 tempArrayAllExercises.filter(
                     (exercise: Exercise) =>
-                        exercise.id ===
-                        exercisesId?.find((id) => id === exercise.id)
+                        exercise.id === exercisesId?.find((id) => id === exercise.id)
                 )
             );
-    }, [allWorkout]);
+    }, [allWorkout, exercisesId]);
 
     useEffect(() => {
         localStorage.setItem("currentExerciseNum", `${currentExerciseNum}`);
@@ -119,12 +116,9 @@ export default function WorkoutPage(): JSX.Element {
                     <Styled.MainBlockTimer>
                         <div>
                             <Controls.ButtomPrewNext
-                                disabled={
-                                    currentExerciseNum === 0 ? true : false
-                                }
+                                disabled={currentExerciseNum === 0 ? true : false}
                                 onClick={() => {
-                                    currentTimeout.current &&
-                                        clearTimeout(currentTimeout.current);
+                                    currentTimeout.current && clearTimeout(currentTimeout.current);
                                     setIsTimerAnimatStart(true);
                                     nextGetReady(-1);
                                 }}
@@ -142,14 +136,10 @@ export default function WorkoutPage(): JSX.Element {
                         <div>
                             <Controls.ButtomPrewNext
                                 disabled={
-                                    currentExerciseNum ===
-                                    currentWorkout.length - 1
-                                        ? true
-                                        : false
+                                    currentExerciseNum === currentWorkout.length - 1 ? true : false
                                 }
                                 onClick={() => {
-                                    currentTimeout.current &&
-                                        clearTimeout(currentTimeout.current);
+                                    currentTimeout.current && clearTimeout(currentTimeout.current);
                                     setIsTimerAnimatStart(true);
                                     nextGetReady(1);
                                 }}
@@ -160,9 +150,7 @@ export default function WorkoutPage(): JSX.Element {
                     </Styled.MainBlockTimer>
                     {currentWorkout ? (
                         <Video
-                            exerciseVideo={
-                                currentWorkout[currentExerciseNum]?.video
-                            }
+                            exerciseVideo={currentWorkout[currentExerciseNum]?.video}
                             isPause={isPause}
                             isReady={isReady}
                         />
@@ -174,18 +162,12 @@ export default function WorkoutPage(): JSX.Element {
 
                     <Styled.PauseDiv>
                         <Controls.PauseButton onClick={paused}>
-                            {isPause ? (
-                                <span>&#9654;</span>
-                            ) : (
-                                <span>&#10073;&#10073;</span>
-                            )}
+                            {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
                         </Controls.PauseButton>
                     </Styled.PauseDiv>
                 </>
             ) : (
-                <CompletePage
-                    workoutTime={+((workoutTime + 1) / 60).toFixed(2)}
-                />
+                <CompletePage workoutTime={+((workoutTime + 1) / 60).toFixed(2)} />
             )}
         </Styled.MainBlockWorkout>
     );

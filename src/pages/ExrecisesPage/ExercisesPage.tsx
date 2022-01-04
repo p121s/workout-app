@@ -26,9 +26,7 @@ export default function ExercisesPage(): JSX.Element {
                 "exercisesId",
                 `${questions
                     .map((question: Question) =>
-                        question.exercises.map(
-                            (exercise: Exercise) => exercise.id
-                        )
+                        question.exercises.map((exercise: Exercise) => exercise.id)
                     )
                     .flat()}`
             );
@@ -49,16 +47,14 @@ export default function ExercisesPage(): JSX.Element {
                             <React.Fragment key={question.title}>
                                 <HR />
                                 <h3>{question.title}</h3>
-                                {question.exercises.map(
-                                    (exercise: Exercise) => (
-                                        <ExerciseCardMini
-                                            key={exercise.id}
-                                            src={exercise.photo}
-                                            title={exercise.title}
-                                            duration={exercise.duration}
-                                        />
-                                    )
-                                )}
+                                {question.exercises.map((exercise: Exercise) => (
+                                    <ExerciseCardMini
+                                        key={exercise.id}
+                                        src={exercise.photo}
+                                        title={exercise.title}
+                                        duration={exercise.duration}
+                                    />
+                                ))}
                             </React.Fragment>
                         ))}
                     </BlockAllExercises>
@@ -71,9 +67,7 @@ export default function ExercisesPage(): JSX.Element {
 
             <Link to="/workout">
                 <SpanInLink>
-                    {localStorage.getItem("currentExerciseNum")
-                        ? "Resume"
-                        : "Start Workout"}
+                    {localStorage.getItem("currentExerciseNum") ? "Resume" : "Start Workout"}
                 </SpanInLink>
             </Link>
         </>

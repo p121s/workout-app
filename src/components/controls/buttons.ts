@@ -27,10 +27,8 @@ export const ButtomPrewNext = styled.button<ButtPrewNxt>`
     background: white;
     border-radius: 7px;
     border: 2px solid
-        ${({ disabled, theme: { colors } }) =>
-            disabled ? colors.gray : colors.purple};
-    color: ${({ disabled, theme: { colors } }) =>
-        disabled ? colors.gray : colors.purple};
+        ${({ disabled, theme: { colors } }) => (disabled ? colors.gray : colors.purple)};
+    color: ${({ disabled, theme: { colors } }) => (disabled ? colors.gray : colors.purple)};
     margin: 10px;
 
     @media screen and (max-width: 500px) {

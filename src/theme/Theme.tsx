@@ -10,6 +10,10 @@ const theme = {
     },
 };
 
-export default function Theme({ children }: any): JSX.Element {
+type Props = {
+    children: JSX.Element;
+};
+
+export default function Theme({ children }: Props): JSX.Element {
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

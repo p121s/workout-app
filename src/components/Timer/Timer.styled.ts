@@ -52,10 +52,8 @@ export const TimerBlock = styled.div<TimerLineAngBlockProps>`
         height: 100%;
         background-color: ${({ color }) => color};
         z-index: 4;
-        animation: ${maskLeft} ${({ duration }) => duration}s steps(1, end)
-            forwards;
-        animation-play-state: ${({ isPause }) =>
-            isPause ? `paused` : `running`};
+        animation: ${maskLeft} ${({ duration }) => duration}s steps(1, end) forwards;
+        animation-play-state: ${({ isPause }) => (isPause ? `paused` : `running`)};
     }
 
     &:after {
@@ -67,10 +65,8 @@ export const TimerBlock = styled.div<TimerLineAngBlockProps>`
         height: 100%;
         background-color: white;
         z-index: 4;
-        animation: ${maskRight} ${({ duration }) => duration}s steps(1, end)
-            forwards;
-        animation-play-state: ${({ isPause }) =>
-            isPause ? `paused` : `running`};
+        animation: ${maskRight} ${({ duration }) => duration}s steps(1, end) forwards;
+        animation-play-state: ${({ isPause }) => (isPause ? `paused` : `running`)};
     }
 
     @media screen and (max-width: 500px) {
