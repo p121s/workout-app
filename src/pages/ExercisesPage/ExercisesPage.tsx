@@ -5,16 +5,20 @@ import ExerciseCardMini from "../../components/ExerciseCardMini/ExerciseCardMini
 import WorkoutDayCard from "../../components/WorkoutDayCard/WorkoutDayCard";
 import background from "../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg";
 import { BlockAllExercises, HR } from "./ExercisesPage.styled";
-import { BlockSpiner, Spinner } from "../../components/shared/shared.styled";
+import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
 import { SpanInLink } from "../../components/controls/buttons";
 import { Question } from "../Question.interfaces";
 import { Exercise } from "../Exercise.interfaces";
+import { workingWithStorage } from "../../storage/workingWithStorage";
 
 export default function ExercisesPage(): JSX.Element {
+
+    const { getStorageItem, setStorageItem } = workingWithStorage;
     const allExercises = useSelector(
         (allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data
     );
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [exercisesId, setExercisesId] = useState<number[]>([]);
 
     useEffect(() => {
         allExercises && setQuestions(allExercises.data.questions);
@@ -22,15 +26,18 @@ export default function ExercisesPage(): JSX.Element {
 
     useEffect(() => {
         questions &&
-            localStorage.setItem(
-                "exercisesId",
-                `${questions
+            setExercisesId(
+                questions
                     .map((question: Question) =>
                         question.exercises.map((exercise: Exercise) => exercise.id)
                     )
-                    .flat()}`
+                    .flat()
             );
     }, [questions]);
+
+    useEffect(() => {
+        exercisesId && setStorageItem("exercisesId", `${exercisesId}`);
+    }, [exercisesId]);
 
     return (
         <>
@@ -60,14 +67,14 @@ export default function ExercisesPage(): JSX.Element {
                     </BlockAllExercises>
                 </>
             ) : (
-                <BlockSpiner>
+                <BlockSpinner>
                     <Spinner />
-                </BlockSpiner>
+                </BlockSpinner>
             )}
 
             <Link to="/workout">
                 <SpanInLink>
-                    {localStorage.getItem("currentExerciseNum") ? "Resume" : "Start Workout"}
+                    {getStorageItem("currentExerciseNum") ? "Resume" : "Start Workout"}
                 </SpanInLink>
             </Link>
         </>

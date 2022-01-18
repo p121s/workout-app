@@ -1,12 +1,12 @@
 export interface TimerProps {
-    sec: number;
     color: string;
     duration: number;
-    isPause: boolean;
-    isStart: boolean;
+    isPause?: boolean;
+    isStart?: boolean;
+    isCompletedTimer(): void;
 }
 
 export interface TimerLineAngBlockProps {
     duration: number;
-    isPause: boolean;
+    isPause?: boolean;
 }

@@ -1,4 +1,4 @@
-import { SET_DATA_API } from "../../constants/constants";
+import { SET_DATA_API } from "../store.constants";
 import { Action, State } from "./allExercises.types";
 
 const INIT_STATE = {

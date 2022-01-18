@@ -1,5 +1,5 @@
 import * as Styled from "./WorkoutDayCard.styled";
-import { WorkoutDayCardProps } from "./WorkoutDayCard.interfases";
+import { WorkoutDayCardProps } from "./WorkoutDayCard.interfaces";
 
 export default function WorkoutDayCard({ backgroundSrc, day, workoutName, workoutDescription }: WorkoutDayCardProps): JSX.Element {
     return (

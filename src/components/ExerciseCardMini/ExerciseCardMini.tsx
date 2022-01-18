@@ -1,5 +1,5 @@
 import * as Styled from "./ExerciseCardMini.styled";
-import { ExerciseCardMiniProps } from "./ExerciseCardMini.interfases";
+import { ExerciseCardMiniProps } from "./ExerciseCardMini.interfaces";
 
 export default function ExerciseCardMini({
     src,

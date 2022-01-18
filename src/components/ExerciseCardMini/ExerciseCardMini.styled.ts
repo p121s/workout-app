@@ -4,7 +4,7 @@ export const MainDiv = styled.div`
     display: flex;
     width: 100%;
     margin: 0 auto;
-    textalign: left;
+    text-align: left;
     z-index: 5;
     transition: all 0.3s ease-out;
 
@@ -25,7 +25,7 @@ export const DivText = styled.div``;
 export const Image = styled.img`
     margin: 5px;
     width: 64px;
-    heidht: 64px;
+    height: 64px;
     border-radius: 5px;
 `;
 

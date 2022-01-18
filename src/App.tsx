@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getAllExercises } from "./store/allExercises/asyncActions";
 import { useDispatch } from "react-redux";
-import ExercisesPage from "./pages/ExrecisesPage/ExercisesPage";
+import ExercisesPage from "./pages/ExercisesPage/ExercisesPage";
 import { Routes, Route } from "react-router";
 import WorkoutPage from "./pages/WorkoutPage/WorkoutPage";
 import { AppBlock } from "./App.styled";

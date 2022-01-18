@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { PropagateLoader } from "react-spinners";
 
-export const BlockSpiner = styled.div`
+export const BlockSpinner = styled.div`
     text-align: center;
 `;
 

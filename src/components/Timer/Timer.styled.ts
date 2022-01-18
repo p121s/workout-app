@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { TimerLineAngBlockProps } from "./Timer.interfases";
+import { TimerLineAngBlockProps } from "./Timer.interfaces";
 
 const lineRotate = keyframes`
     0% {}
@@ -100,7 +100,6 @@ export const TimerLine = styled.div<TimerLineAngBlockProps>`
 export const TimerBody = styled.div`
     display: flex;
     justify-content: center;
-    aling-items: center;
     width: 135px;
     height: 135px;
     background-color: ${(props) => props.theme.colors.white};

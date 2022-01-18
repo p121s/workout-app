@@ -1,151 +1,149 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import * as Styled from "./WorkoutPage.styled";
 import * as Controls from "../../components/controls/buttons";
 import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
-import { Question } from "../Question.interfaces";
 import { Exercise } from "../Exercise.interfaces";
-import { BlockSpiner, Spinner } from "../../components/shared/shared.styled";
+import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
+import { workingWithStorage } from "../../storage/workingWithStorage";
+import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";
+import { getNumbersArrayFromString } from "./getNumberArrayFromString";
 
 export default function WorkoutPage(): JSX.Element {
+    const { getStorageItem, setStorageItem, clearStorage } = workingWithStorage;
     const allWorkout = useSelector(
         (allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data
     );
-    const [exercisesId] = useState(
-        localStorage
-            .getItem("exercisesId")
-            ?.split(",")
-            .map((id) => +id)
+    const [exercisesId] = useState<number[]>(
+        getNumbersArrayFromString(getStorageItem("exercisesId"))
     );
     const [currentExerciseNum, setCurrentExerciseNum] = useState<number>(
-        Number(localStorage.getItem("currentExerciseNum"))
+        Number(getStorageItem("currentExerciseNum"))
     );
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
-    const [duration, setDuration] = useState<number>(6);
-    const [timerCounter, setTimerCounter] = useState<number>(5);
-    const [colorTimer, setColorTimer] = useState<string>("#1DE9B6");
-    const [title, setTitle] = useState<string>("Get Ready");
-    const [workoutTime, setWorkoutTime] = useState<number>(0);
-    const currentTimeout = useRef<any>(0);
-
+    const [duration, setDuration] = useState<number>(5);
+    const [workoutTime, setWorkoutTime] = useState<number>(5);
+    const [isCompletedTimer, setIsCompletedTimer] = useState(false);
     const [isReady, setIsReady] = useState<boolean>(true);
     const [isPause, setIsPause] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
-    const [isTimerAnimatStart, setIsTimerAnimatStart] = useState<boolean>(false);
+    const [isTimerAnimationStart, setIsTimerAnimationStart] = useState<boolean>(false);
 
     useEffect(() => {
-        if (isTimerAnimatStart) {
-            setIsTimerAnimatStart(false);
+        if (isTimerAnimationStart) {
+            setIsTimerAnimationStart(false);
         }
-    }, [isTimerAnimatStart]);
+    }, [isTimerAnimationStart]);
 
     useEffect(() => {
-        const tempArrayAllExercises =
-            allWorkout &&
-            allWorkout.data.questions.map((question: Question) => question.exercises).flat();
+        setWorkoutTime(workoutTime + duration);
+    }, [duration]);
+
+    useEffect(() => {
         allWorkout &&
             setCurrentWorkout(
-                tempArrayAllExercises.filter(
-                    (exercise: Exercise) =>
-                        exercise.id === exercisesId?.find((id) => id === exercise.id)
-                )
+                getCurrentWorkoutFromExercisesIdsString(allWorkout.data.questions, exercisesId)
             );
     }, [allWorkout, exercisesId]);
 
     useEffect(() => {
-        localStorage.setItem("currentExerciseNum", `${currentExerciseNum}`);
+        setStorageItem("currentExerciseNum", `${currentExerciseNum}`);
     }, [currentExerciseNum]);
 
-    useEffect(() => {
+    const shouldBeCompleted = () => {
         if (
             currentExerciseNum !== 0 &&
             currentWorkout.length &&
             currentExerciseNum >= currentWorkout.length
         ) {
-            clearTimeout(currentTimeout.current);
-            setIsComplete(true);
-            localStorage.clear();
+            return true;
+        } else {
+            return false;
         }
-    }, [currentExerciseNum, currentWorkout.length]);
+    };
+
+    const toCompleteWorkout = () => {
+        setIsComplete(true);
+        clearStorage();
+    };
 
     useEffect(() => {
-        if (!isPause && !isComplete) {
-            if (timerCounter === -1 && isReady) {
-                nextExercise();
-            } else if (timerCounter === -1 && !isReady) {
-                nextGetReady(1);
-            } else {
-                currentTimeout.current = setTimeout(() => {
-                    setTimerCounter(timerCounter - 1);
-                    setWorkoutTime(workoutTime + 1);
-                }, 1000);
-            }
+        if (shouldBeCompleted()) {
+            toCompleteWorkout();
         }
-        return () => clearTimeout(currentTimeout.current);
-    }, [timerCounter, isReady, isPause, currentTimeout.current]);
+    }, [shouldBeCompleted]);
 
     const nextExercise = () => {
-        setTimerCounter(currentWorkout[currentExerciseNum].duration);
-        setDuration(currentWorkout[currentExerciseNum].duration + 1);
-        setColorTimer("#FF4081");
+        setDuration(currentWorkout[currentExerciseNum].duration);
         setIsReady(false);
-        setTitle(currentWorkout[currentExerciseNum].title);
     };
 
-    const nextGetReady = (prewOrNext: number) => {
-        setCurrentExerciseNum(currentExerciseNum + prewOrNext);
-        setTimerCounter(5);
-        setDuration(6);
-        setColorTimer("#1DE9B6");
+    const nextGetReady = (prevOrNext: number) => {
+        setCurrentExerciseNum(currentExerciseNum + prevOrNext);
+        setDuration(5);
         setIsReady(true);
-        setTitle("Get Ready");
     };
 
+    useEffect(() => {
+        if (isCompletedTimer) {
+            if (isReady) {
+                nextExercise();
+            } else {
+                nextGetReady(1);
+            }
+        }
+        setIsCompletedTimer(false);
+    }, [isCompletedTimer, isReady]);
+
+    
     const paused = () => {
-        clearTimeout(currentTimeout.current);
         setIsPause(!isPause);
+    };
+
+    const handleCompletedTimer = () => {
+        setIsCompletedTimer(true);
     };
 
     return (
         <Styled.MainBlockWorkout>
             {!isComplete ? (
                 <>
-                    <h2>{title}</h2>
+                    <h2>
+                        {duration === 5 ? "Get Ready" : currentWorkout[currentExerciseNum].title}
+                    </h2>
                     <Styled.MainBlockTimer>
                         <div>
-                            <Controls.ButtomPrewNext
+                            <Controls.ButtonPrevNext
                                 disabled={currentExerciseNum === 0 ? true : false}
                                 onClick={() => {
-                                    currentTimeout.current && clearTimeout(currentTimeout.current);
-                                    setIsTimerAnimatStart(true);
+                                    setIsTimerAnimationStart(true);
                                     nextGetReady(-1);
                                 }}
                             >
                                 &#10073;&#9664;
-                            </Controls.ButtomPrewNext>
+                            </Controls.ButtonPrevNext>
                         </div>
                         <Timer
-                            sec={timerCounter}
-                            color={colorTimer}
+                            color={duration === 5 ? "#1DE9B6" : "#FF4081"}
                             duration={duration}
                             isPause={isPause}
-                            isStart={isTimerAnimatStart}
+                            isStart={isTimerAnimationStart}
+                            isCompletedTimer={handleCompletedTimer}
                         />
                         <div>
-                            <Controls.ButtomPrewNext
+                            <Controls.ButtonPrevNext
                                 disabled={
                                     currentExerciseNum === currentWorkout.length - 1 ? true : false
                                 }
                                 onClick={() => {
-                                    currentTimeout.current && clearTimeout(currentTimeout.current);
-                                    setIsTimerAnimatStart(true);
+                                    setIsTimerAnimationStart(true);
                                     nextGetReady(1);
                                 }}
                             >
                                 &#9654;&#10073;
-                            </Controls.ButtomPrewNext>
+                            </Controls.ButtonPrevNext>
                         </div>
                     </Styled.MainBlockTimer>
                     {currentWorkout ? (
@@ -155,9 +153,9 @@ export default function WorkoutPage(): JSX.Element {
                             isReady={isReady}
                         />
                     ) : (
-                        <BlockSpiner>
+                        <BlockSpinner>
                             <Spinner />
-                        </BlockSpiner>
+                        </BlockSpinner>
                     )}
 
                     <Styled.PauseDiv>

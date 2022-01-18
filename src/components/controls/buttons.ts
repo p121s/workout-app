@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtPrewNxt } from "./buttons.interfases";
+import { ButtPrevNxt } from "./buttons.interfaces";
 
 export const SpanInLink = styled.span`
     width: 55.6%;
@@ -21,7 +21,7 @@ export const SpanInLink = styled.span`
     }
 `;
 
-export const ButtomPrewNext = styled.button<ButtPrewNxt>`
+export const ButtonPrevNext = styled.button<ButtPrevNxt>`
     width: 70px;
     height: 50px;
     background: white;
