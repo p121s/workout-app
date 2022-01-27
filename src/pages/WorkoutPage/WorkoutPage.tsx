@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import * as Styled from "./WorkoutPage.styled";
-import * as Controls from "../../components/controls/buttons";
+import * as Controls from "../../controls/buttons";
 import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
 import { Exercise } from "../../interfaces/Exercise.interfaces";
-import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
+import { BlockSpinner, Spinner } from "../../shared/shared.styled";
 import { workingWithStorage } from "../../services/storageService/localStorageService";
 import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";
 import { getNumbersArrayFromString } from "./getNumberArrayFromString";
