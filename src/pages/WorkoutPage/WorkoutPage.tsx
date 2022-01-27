@@ -30,6 +30,10 @@ export default function WorkoutPage(): JSX.Element {
     const [isPause, setIsPause] = useState<boolean>(false);
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [isTimerAnimationStart, setIsTimerAnimationStart] = useState<boolean>(false);
+    const [isVideoUploadError, setIsVideoUploadError] = useState<boolean>(false);
+
+    console.log(isVideoUploadError);
+    
 
     useEffect(() => {
         if (isTimerAnimationStart) {
@@ -105,9 +109,13 @@ export default function WorkoutPage(): JSX.Element {
         setIsCompletedTimer(true);
     };
 
+    const handleVideoUploadError = () => {
+        setIsVideoUploadError(true);
+    }
+
     return (
         <Styled.MainBlockWorkout>
-            {allWorkout ? (
+            {allWorkout && !isVideoUploadError ? (
                 !isComplete ? (
                     <>
                         <h2>
@@ -155,6 +163,7 @@ export default function WorkoutPage(): JSX.Element {
                                 exerciseVideo={currentWorkout[currentExerciseNum]?.video}
                                 isPause={isPause}
                                 isReady={isReady}
+                                handleVideoUploadError={handleVideoUploadError}
                             />
                         ) : (
                             <BlockSpinner>

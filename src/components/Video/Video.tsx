@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { VideoProps } from "./Video.interfaces";
 import { VideoTag } from "./Video.styled";
 
-export default function Video({ exerciseVideo, isPause, isReady }: VideoProps): JSX.Element {
+export default function Video({ exerciseVideo, isPause, isReady, handleVideoUploadError }: VideoProps): JSX.Element {
     const video = useRef<any>();
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default function Video({ exerciseVideo, isPause, isReady }: VideoProps): 
     }, [isPause, isReady]);
 
     return (
-        <VideoTag ref={video} src={`${exerciseVideo}`} muted loop>
+        <VideoTag ref={video} src={`${exerciseVideo}`} muted loop onError={handleVideoUploadError}>
             <source type="video/mp4" />
         </VideoTag>
     );
