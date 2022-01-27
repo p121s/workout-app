@@ -97,7 +97,6 @@ export default function WorkoutPage(): JSX.Element {
         setIsCompletedTimer(false);
     }, [isCompletedTimer, isReady]);
 
-    
     const paused = () => {
         setIsPause(!isPause);
     };
@@ -108,64 +107,72 @@ export default function WorkoutPage(): JSX.Element {
 
     return (
         <Styled.MainBlockWorkout>
-            {!isComplete ? (
-                <>
-                    <h2>
-                        {duration === 5 ? "Get Ready" : currentWorkout[currentExerciseNum].title}
-                    </h2>
-                    <Styled.MainBlockTimer>
-                        <div>
-                            <Controls.ButtonPrevNext
-                                disabled={currentExerciseNum === 0 ? true : false}
-                                onClick={() => {
-                                    setIsTimerAnimationStart(true);
-                                    nextGetReady(-1);
-                                }}
-                            >
-                                &#10073;&#9664;
-                            </Controls.ButtonPrevNext>
-                        </div>
-                        <Timer
-                            color={duration === 5 ? "#1DE9B6" : "#FF4081"}
-                            duration={duration}
-                            isPause={isPause}
-                            isStart={isTimerAnimationStart}
-                            isCompletedTimer={handleCompletedTimer}
-                        />
-                        <div>
-                            <Controls.ButtonPrevNext
-                                disabled={
-                                    currentExerciseNum === currentWorkout.length - 1 ? true : false
-                                }
-                                onClick={() => {
-                                    setIsTimerAnimationStart(true);
-                                    nextGetReady(1);
-                                }}
-                            >
-                                &#9654;&#10073;
-                            </Controls.ButtonPrevNext>
-                        </div>
-                    </Styled.MainBlockTimer>
-                    {currentWorkout ? (
-                        <Video
-                            exerciseVideo={currentWorkout[currentExerciseNum]?.video}
-                            isPause={isPause}
-                            isReady={isReady}
-                        />
-                    ) : (
-                        <BlockSpinner>
-                            <Spinner />
-                        </BlockSpinner>
-                    )}
+            {allWorkout ? (
+                !isComplete ? (
+                    <>
+                        <h2>
+                            {duration === 5
+                                ? "Get Ready"
+                                : currentWorkout[currentExerciseNum].title}
+                        </h2>
+                        <Styled.MainBlockTimer>
+                            <div>
+                                <Controls.ButtonPrevNext
+                                    disabled={currentExerciseNum === 0 ? true : false}
+                                    onClick={() => {
+                                        setIsTimerAnimationStart(true);
+                                        nextGetReady(-1);
+                                    }}
+                                >
+                                    &#10073;&#9664;
+                                </Controls.ButtonPrevNext>
+                            </div>
+                            <Timer
+                                color={duration === 5 ? "#1DE9B6" : "#FF4081"}
+                                duration={duration}
+                                isPause={isPause}
+                                isStart={isTimerAnimationStart}
+                                isCompletedTimer={handleCompletedTimer}
+                            />
+                            <div>
+                                <Controls.ButtonPrevNext
+                                    disabled={
+                                        currentExerciseNum === currentWorkout.length - 1
+                                            ? true
+                                            : false
+                                    }
+                                    onClick={() => {
+                                        setIsTimerAnimationStart(true);
+                                        nextGetReady(1);
+                                    }}
+                                >
+                                    &#9654;&#10073;
+                                </Controls.ButtonPrevNext>
+                            </div>
+                        </Styled.MainBlockTimer>
+                        {currentWorkout ? (
+                            <Video
+                                exerciseVideo={currentWorkout[currentExerciseNum]?.video}
+                                isPause={isPause}
+                                isReady={isReady}
+                            />
+                        ) : (
+                            <BlockSpinner>
+                                <Spinner />
+                            </BlockSpinner>
+                        )}
 
-                    <Styled.PauseDiv>
-                        <Controls.PauseButton onClick={paused}>
-                            {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
-                        </Controls.PauseButton>
-                    </Styled.PauseDiv>
-                </>
+                        <Styled.PauseDiv>
+                            <Controls.PauseButton onClick={paused}>
+                                {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
+                            </Controls.PauseButton>
+                        </Styled.PauseDiv>
+                    </>
+                ) : (
+                    <CompletePage workoutTime={+((workoutTime + 1) / 60).toFixed(2)} />
+                )
             ) : (
-                <CompletePage workoutTime={+((workoutTime + 1) / 60).toFixed(2)} />
+                "No internet connection"
             )}
         </Styled.MainBlockWorkout>
     );
