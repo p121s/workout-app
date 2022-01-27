@@ -54,12 +54,12 @@ export default function ExercisesPage(): JSX.Element {
                             <React.Fragment key={question.title}>
                                 <HR />
                                 <h3>{question.title}</h3>
-                                {question.exercises.map((exercise: Exercise) => (
+                                {question.exercises.map(({id, photo, title, duration}: Exercise) => (
                                     <ExerciseCardMini
-                                        key={exercise.id}
-                                        src={exercise.photo}
-                                        title={exercise.title}
-                                        duration={exercise.duration}
+                                        key={id}
+                                        src={photo}
+                                        title={title}
+                                        duration={duration}
                                     />
                                 ))}
                             </React.Fragment>
