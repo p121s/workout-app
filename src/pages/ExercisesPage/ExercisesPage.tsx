@@ -9,7 +9,7 @@ import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
 import { SpanInLink } from "../../components/controls/buttons";
 import { Question } from "../../interfaces/Question.interfaces";
 import { Exercise } from "../../interfaces/Exercise.interfaces";
-import { workingWithStorage } from "../../services/storageService/workingWithStorage";
+import { workingWithStorage } from "../../services/storageService/localStorageService";
 
 export default function ExercisesPage(): JSX.Element {
 

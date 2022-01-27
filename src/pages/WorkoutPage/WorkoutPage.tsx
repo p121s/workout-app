@@ -7,7 +7,7 @@ import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
 import { Exercise } from "../../interfaces/Exercise.interfaces";
 import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
-import { workingWithStorage } from "../../services/storageService/workingWithStorage";
+import { workingWithStorage } from "../../services/storageService/localStorageService";
 import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";
 import { getNumbersArrayFromString } from "./getNumberArrayFromString";
 
