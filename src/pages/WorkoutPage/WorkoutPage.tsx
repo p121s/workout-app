@@ -5,7 +5,7 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
-import { Exercise } from "../Exercise.interfaces";
+import { Exercise } from "../../interfaces/Exercise.interfaces";
 import { BlockSpinner, Spinner } from "../../components/shared/shared.styled";
 import { workingWithStorage } from "../../services/storageService/workingWithStorage";
 import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";

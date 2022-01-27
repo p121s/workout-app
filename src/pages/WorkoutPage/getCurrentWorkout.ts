@@ -1,5 +1,5 @@
-import { Question } from "../Question.interfaces";
-import { Exercise } from "../Exercise.interfaces";
+import { Question } from "../../interfaces/Question.interfaces";
+import { Exercise } from "../../interfaces/Exercise.interfaces";
 
 export const getCurrentWorkoutFromExercisesIdsString = (workout: Question[], exercisesId: number[] ): Exercise[] => {
     return workout
