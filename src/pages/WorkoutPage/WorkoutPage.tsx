@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import * as Styled from "./WorkoutPage.styled";
-import * as Controls from "../../controls/buttons";
+import { ButtonPrevNext } from "../../controls/ButtonPrewNext";
+import { PauseButton } from "../../controls/PauseButton.ts";
 import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
@@ -122,7 +123,7 @@ export default function WorkoutPage(): JSX.Element {
                         </h2>
                         <Styled.MainBlockTimer>
                             <div>
-                                <Controls.ButtonPrevNext
+                                <ButtonPrevNext
                                     disabled={currentExerciseNum === 0 ? true : false}
                                     onClick={() => {
                                         setIsTimerAnimationStart(true);
@@ -130,7 +131,7 @@ export default function WorkoutPage(): JSX.Element {
                                     }}
                                 >
                                     &#10073;&#9664;
-                                </Controls.ButtonPrevNext>
+                                </ButtonPrevNext>
                             </div>
                             <Timer
                                 color={duration === 5 ? "#1DE9B6" : "#FF4081"}
@@ -140,7 +141,7 @@ export default function WorkoutPage(): JSX.Element {
                                 isCompletedTimer={handleCompletedTimer}
                             />
                             <div>
-                                <Controls.ButtonPrevNext
+                                <ButtonPrevNext
                                     disabled={
                                         currentExerciseNum === currentWorkout.length - 1
                                             ? true
@@ -152,7 +153,7 @@ export default function WorkoutPage(): JSX.Element {
                                     }}
                                 >
                                     &#9654;&#10073;
-                                </Controls.ButtonPrevNext>
+                                </ButtonPrevNext>
                             </div>
                         </Styled.MainBlockTimer>
                         {currentWorkout ? (
@@ -169,9 +170,9 @@ export default function WorkoutPage(): JSX.Element {
                         )}
 
                         <Styled.PauseDiv>
-                            <Controls.PauseButton onClick={paused}>
+                            <PauseButton onClick={paused}>
                                 {isPause ? <span>&#9654;</span> : <span>&#10073;&#10073;</span>}
-                            </Controls.PauseButton>
+                            </PauseButton>
                         </Styled.PauseDiv>
                     </>
                 ) : (
