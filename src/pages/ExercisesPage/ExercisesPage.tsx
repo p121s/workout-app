@@ -72,11 +72,16 @@ export default function ExercisesPage(): JSX.Element {
                 </BlockSpinner>
             )}
 
-            <Link to="/workout">
-                <SpanInLink>
-                    {getStorageItem("currentExerciseNum") ? "Resume" : "Start Workout"}
-                </SpanInLink>
-            </Link>
+            {allExercises ? (
+                <Link to="/workout">
+                    <SpanInLink>
+                        {getStorageItem("currentExerciseNum") ? "Resume" : "Start Workout"}
+                    </SpanInLink>
+                </Link>
+            ) : ''
+                
+            }
+            
         </>
     );
 }
