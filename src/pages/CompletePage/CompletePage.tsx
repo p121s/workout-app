@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SpanInLink } from "../../controls/PauseButton.ts";
+import { SpanInLink } from "../../controls/SpanInLink";
 import * as Styled from "./CompletePage.styled";
 import { CompletePageProps } from "./CompletePage.interfaces";
 
