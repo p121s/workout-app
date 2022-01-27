@@ -29,7 +29,7 @@ export default function ExercisesPage(): JSX.Element {
             setExercisesId(
                 questions
                     .map((question: Question) =>
-                        question.exercises.map((exercise: Exercise) => exercise.id)
+                        question.exercises.map(({id}: Exercise) => id)
                     )
                     .flat()
             );
