@@ -7,13 +7,13 @@ import background from "../../images/8159213eb1178bb3edb090bde2e17e3b.jpeg";
 import { BlockAllExercises, HR } from "./ExercisesPage.styled";
 import { BlockSpinner, Spinner } from "../../shared/shared.styled";
 import { SpanInLink } from "../../controls/SpanInLink";
-import { Question } from "../../components/interfaces/Question.interfaces";
-import { Exercise } from "../../components/interfaces/Exercise.interfaces";
-import { workingWithStorage } from "../../services/storageService/localStorageService";
+import { Question } from "../interfaces/Question.interfaces";
+import { Exercise } from "../interfaces/Exercise.interfaces";
+import { storageService } from "../../services/storageService/storageService";
 
 export default function ExercisesPage(): JSX.Element {
 
-    const { getStorageItem, setStorageItem } = workingWithStorage;
+    const { getStorageItem, setStorageItem } = storageService;
     const allExercises = useSelector(
         (allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data
     );

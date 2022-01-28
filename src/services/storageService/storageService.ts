@@ -1,4 +1,4 @@
-export const workingWithStorage = {
+export const storageService = {
     getStorageItem(item: string): string | null {
         return localStorage.getItem(item);
     },
@@ -10,4 +10,4 @@ export const workingWithStorage = {
     clearStorage(): void {
         localStorage.clear();
     },
-}
+};

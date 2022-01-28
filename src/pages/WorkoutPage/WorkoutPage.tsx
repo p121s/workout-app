@@ -6,14 +6,14 @@ import { RootStateOrAny, useSelector } from "react-redux";
 import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
-import { Exercise } from "../../components/interfaces/Exercise.interfaces";
+import { Exercise } from "../interfaces/Exercise.interfaces";
 import { BlockSpinner, Spinner } from "../../shared/shared.styled";
-import { workingWithStorage } from "../../services/storageService/localStorageService";
+import { storageService } from "../../services/storageService/storageService";
 import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";
 import { getNumbersArrayFromString } from "./getNumberArrayFromString";
 
 export default function WorkoutPage(): JSX.Element {
-    const { getStorageItem, setStorageItem, clearStorage } = workingWithStorage;
+    const { getStorageItem, setStorageItem, clearStorage } = storageService;
     const allWorkout = useSelector(
         (allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data
     );
