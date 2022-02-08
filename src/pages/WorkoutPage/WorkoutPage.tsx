@@ -7,16 +7,20 @@ import Timer from "../../components/Timer/Timer";
 import Video from "../../components/Video/Video";
 import CompletePage from "../CompletePage/CompletePage";
 import { Exercise } from "../interfaces/Exercise.interfaces";
+import { Question } from "../interfaces/Question.interfaces";
 import { BlockSpinner, Spinner } from "../../shared/shared.styled";
 import { storageService } from "../../services/storageService/storageService";
-import { getCurrentWorkoutFromExercisesIdsString } from "./getCurrentWorkout";
-import { getNumbersArrayFromString } from "./getNumberArrayFromString";
 
 export default function WorkoutPage(): JSX.Element {
     const { getStorageItem, setStorageItem, clearStorage } = storageService;
     const allWorkout = useSelector(
         (allExercises: RootStateOrAny) => allExercises.reducerAllExercises.data
     );
+
+    const getNumbersArrayFromString = (stringNums: string | null): number[] => {
+        return stringNums ? stringNums.split(",").map((id) => +id) : [];
+    };
+
     const [exercisesId] = useState<number[]>(
         getNumbersArrayFromString(getStorageItem("exercisesId"))
     );
@@ -32,7 +36,7 @@ export default function WorkoutPage(): JSX.Element {
     const [isComplete, setIsComplete] = useState<boolean>(false);
     const [isTimerAnimationStart, setIsTimerAnimationStart] = useState<boolean>(false);
     const [isVideoUploadError, setIsVideoUploadError] = useState<boolean>(false);
-    
+
     useEffect(() => {
         if (isTimerAnimationStart) {
             setIsTimerAnimationStart(false);
@@ -42,6 +46,19 @@ export default function WorkoutPage(): JSX.Element {
     useEffect(() => {
         setWorkoutTime(workoutTime + duration);
     }, [duration]);
+
+    const getCurrentWorkoutFromExercisesIdsString = (
+        workout: Question[],
+        exercisesId: number[]
+    ): Exercise[] => {
+        return workout
+            .map(({ exercises }: Question) => exercises)
+            .flat()
+            .filter(
+                (exercise: Exercise) =>
+                    exercise.id === exercisesId?.find((id) => id === exercise.id)
+            );
+    };
 
     useEffect(() => {
         allWorkout &&
@@ -109,7 +126,7 @@ export default function WorkoutPage(): JSX.Element {
 
     const handleVideoUploadError = () => {
         setIsVideoUploadError(true);
-    }
+    };
 
     return (
         <Styled.MainBlockWorkout>
