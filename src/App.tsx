@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getAllExercises } from "./store/allExercises/asyncActions";
+import { asyncSetAllExercises } from "./store/allExercises/actionCreators";
 import { useDispatch } from "react-redux";
 import ExercisesPage from "./pages/ExercisesPage/ExercisesPage";
 import { Routes, Route } from "react-router";
@@ -11,7 +11,7 @@ function App(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllExercises());
+        dispatch(asyncSetAllExercises());
     }, [dispatch]);
 
     return (
