@@ -4,7 +4,7 @@ import { FETCH_SET_DATA_API } from "../store.constants";
 
 const fetchAllExercises = () => fetch(`${process.env.REACT_APP_SOURCE_API}`);
 
-export function* getAllExercises(): any {
+export function* getAllExercises(): unknown {
     try {
         const data = yield call(fetchAllExercises);
         const json = yield call(() => new Promise((res) => res(data.json())));
@@ -14,6 +14,6 @@ export function* getAllExercises(): any {
     }
 }
 
-export function* allExercisesWatcher(): any {
+export function* allExercisesWatcher(): unknown {
     yield takeEvery(FETCH_SET_DATA_API, getAllExercises);
 }
